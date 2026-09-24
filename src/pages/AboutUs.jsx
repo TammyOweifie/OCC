@@ -5,7 +5,7 @@ import ReadMore from '../components/ui/ReadMore.jsx'
 import ScrollReveal from '../components/shared/ScrollReveal.jsx'
 
 const woodlotText =
-  "The Women's Woodlot Reserve Initiative is OCC's flagship program which was launched in 2017 with the aim of preserving the Aeroplane Field forest and the natural spring grotto on the plateau which unfortunately, have witnessed degradation and vulnerability attributable to activities such as deforestation, pollution, bush burning and cattle grazing. With the collaborative efforts of the community volunteers and OCC staff, in March 2020, OCC completed phase 1 of the initiative which involved clearing the essential section of the reserve area and conducting fire tracing to prevent bush fires. In August 2020, OCC progressed into phase 2 of the initiative, the reforestation phase. This phase entails creating a man-made forest on the plateau by planting fast-growing indigenous trees. A total of 2,500 seedlings were planted in the reserve in 2020. Today we have planted over 50,000 seedlings with the support of the women in the community."
+  "The Women's Woodlot Reserve Initiative is OCC's flagship reserve which was launched in 2017 with the aim of preserving the Aeroplane Field forest and the natural spring grotto on the plateau which unfortunately, have witnessed degradation and vulnerability attributable to activities such as deforestation, pollution, bush burning and cattle grazing. With the collaborative efforts of the community volunteers and OCC staff, in March 2020, OCC completed phase 1 of the initiative which involved clearing the essential section of the reserve area and conducting fire tracing to prevent bush fires. In August 2020, OCC progressed into phase 2 of the initiative, the reforestation phase. This phase entails creating a man-made forest on the plateau by planting fast-growing indigenous trees. A total of 2,500 seedlings were planted in the reserve in 2020. Today we have planted over 50,000 seedlings with the support of the women in the community."
 
 const pillars = [
   {
@@ -137,7 +137,7 @@ function AboutUs() {
         </div>
       </section>
 
-      {/* Flagship Program — Women's Woodlot Reserve */}
+      {/* flagship reserve — Women's Woodlot Reserve */}
       <section
         aria-label="Women's Woodlot Reserve Initiative"
         className="w-full py-24 bg-sand-100 border-t border-sand-200"
@@ -148,7 +148,7 @@ function AboutUs() {
             <div className="lg:col-span-6 space-y-6">
               <ScrollReveal>
                 <span className="text-xs uppercase tracking-eyebrow font-semibold text-accent block">
-                  Flagship Initiative · Established 2017
+                  Flagship reserve · Established 2017
                 </span>
               </ScrollReveal>
               <ScrollReveal delay={0.1}>
