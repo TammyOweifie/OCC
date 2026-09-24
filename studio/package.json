@@ -1,0 +1,20 @@
+{
+  "name": "occ-studio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sanity Studio for Obudu Conservation Centre — Publications & Reports (CMS prep, not yet live)",
+  "scripts": {
+    "dev": "sanity dev",
+    "start": "sanity start",
+    "build": "sanity build",
+    "deploy": "sanity deploy"
+  },
+  "keywords": ["sanity"],
+  "dependencies": {
+    "@sanity/vision": "^3.60.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sanity": "^3.60.0",
+    "styled-components": "^6.1.13"
+  }
+}
