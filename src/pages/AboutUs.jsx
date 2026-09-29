@@ -11,12 +11,12 @@ const pillars = [
   {
     number: '01',
     name: 'Research',
-    body: "With the goal of becoming a renowned research hub for biodiversity conservation in Africa, OCC actively seeks partnerships with universities, institutions, and conservation organisations to track, monitor, and research the region's biodiversity supporting preservation and restoration.",
+    body: "With the goal of becoming a renowned research hub for biodiversity conservation in Africa, OCC has partnered with universities, institutions, and conservation organisations to track, monitor, and research the region's biodiversity supporting preservation and restoration.",
   },
   {
     number: '02',
     name: 'Education',
-    body: 'Education is at the forefront of our agenda. To educate this generation on the importance of conservation is to safeguard the next. As an education centre, OCC develops a new generation of environmentalists through advocacy and educational camps.',
+    body: 'To educate this generation on the importance of conservation is to safeguard the next. As an education centre, OCC develops a new generation of environmentalists through advocacy and educational camps.',
   },
   {
     number: '03',

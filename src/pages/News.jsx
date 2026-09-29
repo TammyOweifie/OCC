@@ -1,11 +1,11 @@
-// Publications page
+// News page
 import { useState } from 'react'
 import Button from '../components/ui/Button.jsx'
 import Card from '../components/ui/Card.jsx'
 import SectionHeading from '../components/ui/SectionHeading.jsx'
 import Modal from '../components/shared/Modal.jsx'
 import ScrollReveal from '../components/shared/ScrollReveal.jsx'
-import { publications } from '../data/publications.js'
+import { news } from '../data/news.js'
 
 function formatDate(iso) {
   return new Date(iso).toLocaleDateString('en-US', {
@@ -14,7 +14,7 @@ function formatDate(iso) {
   })
 }
 
-function Publications() {
+function News() {
   const [selected, setSelected] = useState(null)
 
   return (
@@ -24,7 +24,7 @@ function Publications() {
         <ScrollReveal>
           <div className="max-w-3xl">
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-sand-900 mb-6">
-              Publications.
+              News.
             </h1>
             <p className="text-earth-700 font-sans text-lg sm:text-xl leading-relaxed font-light">
               Stories, updates, and field notes from our work on the Obudu Plateau.
@@ -35,14 +35,14 @@ function Publications() {
 
       {/* Card Grid */}
       <section className="max-w-6xl mx-auto px-6 sm:px-12 pb-24 sm:pb-32">
-        {publications.length === 0 ? (
+        {news.length === 0 ? (
           <ScrollReveal>
             <div className="border-t border-sand-200 py-24 text-center">
               <span className="font-mono text-xs uppercase tracking-widest text-earth-600 block mb-3">
                 Coming Soon
               </span>
               <p className="text-earth-700 font-light max-w-md mx-auto leading-relaxed">
-                New publications, field notes, and community stories will appear here as they&apos;re released.
+                New stories, field notes, and community updates will appear here as they&apos;re released.
               </p>
             </div>
           </ScrollReveal>
@@ -51,35 +51,35 @@ function Publications() {
             stagger
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-14"
           >
-            {publications.map(pub => (
+            {news.map(post => (
               <Card
-                key={pub.id}
-                image={pub.coverImage}
-                imageAlt={pub.coverAlt || pub.title}
+                key={post.id}
+                image={post.coverImage}
+                imageAlt={post.coverAlt || post.title}
                 imageAspect="aspect-[3/2]"
               >
                 <time
-                  dateTime={pub.date}
+                  dateTime={post.date}
                   className="font-mono text-xs text-earth-600 tracking-wider uppercase mb-2"
                 >
-                  {formatDate(pub.date)}
+                  {formatDate(post.date)}
                 </time>
                 <h2 className="font-serif text-xl font-normal text-sand-900 leading-snug mb-3 group-hover:text-forest-700 transition-colors">
                   <button
                     type="button"
-                    onClick={() => setSelected(pub)}
+                    onClick={() => setSelected(post)}
                     className="text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                   >
-                    {pub.title}
+                    {post.title}
                   </button>
                 </h2>
                 <p className="font-sans text-sm text-earth-700 leading-relaxed line-clamp-3 mb-4 font-light flex-grow">
-                  {pub.excerpt}
+                  {post.excerpt}
                 </p>
                 <div className="pt-1">
                   <button
                     type="button"
-                    onClick={() => setSelected(pub)}
+                    onClick={() => setSelected(post)}
                     className="inline-flex items-center text-xs font-semibold tracking-wider uppercase text-accent hover:text-forest-700 transition-colors"
                   >
                     Read more{' '}
@@ -94,11 +94,11 @@ function Publications() {
         )}
       </section>
 
-      {/* Publication Detail Modal */}
+      {/* News Detail Modal */}
       <Modal
         isOpen={!!selected}
         onClose={() => setSelected(null)}
-        labelledBy="publication-modal-title"
+        labelledBy="news-modal-title"
       >
         {selected && (
           <article>
@@ -119,7 +119,7 @@ function Publications() {
                 {formatDate(selected.date)}
               </time>
               <h2
-                id="publication-modal-title"
+                id="news-modal-title"
                 className="font-serif text-2xl sm:text-3xl font-normal text-sand-900 leading-tight mb-6 tracking-tight"
               >
                 {selected.title}
@@ -159,4 +159,4 @@ function Publications() {
   )
 }
 
-export default Publications
+export default News

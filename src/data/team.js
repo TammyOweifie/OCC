@@ -28,14 +28,14 @@ export const coreTeam = [
 
 export const boardMembers = [
   {
-    name: 'Professor John Oates',
-    title: 'Board Member / Trustee',
-    focus: 'Advisory · Primatology & Conservation',
-  },
-  {
     name: 'Owanari Duke',
     title: 'Board Member / Trustee',
     focus: 'Advisory · Community Leadership',
+  },
+  {
+    name: 'Professor John Oates',
+    title: 'Board Member / Trustee',
+    focus: 'Advisory · Primatology & Conservation',
   },
   {
     name: 'Disun Holloway',

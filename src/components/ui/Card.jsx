@@ -1,4 +1,4 @@
-// Reusable content card (used for team members, publications, etc.)
+// Reusable content card (used for team members, news posts, etc.)
 import { Link } from 'react-router-dom'
 
 function Card({

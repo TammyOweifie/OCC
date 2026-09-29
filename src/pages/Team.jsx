@@ -22,7 +22,7 @@ function Team() {
         </ScrollReveal>
         <ScrollReveal delay={0.2}>
           <p className="max-w-2xl mx-auto text-base md:text-lg text-earth-700 leading-relaxed font-light">
-            The people behind OCC&apos;s work on the Obudu Plateau &mdash; dedicated conservationists, researchers, community liaisons, and field scientists.
+            The people behind OCC&apos;s work on the Obudu Plateau: dedicated conservationists, researchers, community liaisons, and field scientists.
           </p>
         </ScrollReveal>
         <ScrollReveal delay={0.3}>

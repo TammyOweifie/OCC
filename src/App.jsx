@@ -6,7 +6,7 @@ import Home from './pages/Home.jsx'
 import Team from './pages/Team.jsx'
 import AboutUs from './pages/AboutUs.jsx'
 import Donate from './pages/Donate.jsx'
-import Publications from './pages/Publications.jsx'
+import News from './pages/News.jsx'
 import Reports from './pages/Reports.jsx'
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
           <Route path="/team" element={<Team />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/donate" element={<Donate />} />
-          <Route path="/publications" element={<Publications />} />
+          <Route path="/news" element={<News />} />
           <Route path="/reports" element={<Reports />} />
         </Routes>
       </main>
