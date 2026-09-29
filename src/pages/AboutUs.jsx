@@ -188,7 +188,7 @@ function AboutUs() {
               <figure className="relative m-0 bg-sand-50 border border-sand-300/60 p-2 shadow-sm">
                 <div className="aspect-[4/3] overflow-hidden bg-sand-200">
                   <img
-                    src="/assets/images/home/bg-hero.png"
+                    src="/assets/images/home/bg-hero.jpg"
                     alt="Water cascading down moss-covered rocks at the natural spring grotto on the Obudu Plateau"
                     className="w-full h-full object-cover"
                   />
