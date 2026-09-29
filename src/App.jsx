@@ -8,6 +8,7 @@ import AboutUs from './pages/AboutUs.jsx'
 import Donate from './pages/Donate.jsx'
 import News from './pages/News.jsx'
 import Reports from './pages/Reports.jsx'
+import Gallery from './pages/Gallery.jsx'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/donate" element={<Donate />} />
           <Route path="/news" element={<News />} />
           <Route path="/reports" element={<Reports />} />
+          <Route path="/gallery" element={<Gallery />} />
         </Routes>
       </main>
       <Footer />
