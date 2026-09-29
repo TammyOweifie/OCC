@@ -4,7 +4,7 @@
 // Until VITE_SANITY_PROJECT_ID is set, `sanityClient` is null and
 // any attempt to call `.fetch(...)` from a caller must guard for that.
 //
-// See src/data/getPublicationsFromSanity.js and
+// See src/data/getNewsFromSanity.js and
 // src/data/getReportsFromSanity.js for how this is intended to be used
 // once the CMS is commissioned.
 

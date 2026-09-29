@@ -17,7 +17,7 @@ const mobileLinks = [
   { to: '/team', label: 'Team' },
   { to: '/about', label: 'About Us' },
   { to: '/donate', label: 'Donate' },
-  { to: '/publications', label: 'Publications' },
+  { to: '/news', label: 'News' },
   { to: '/reports', label: 'Reports' },
 ]
 
@@ -50,7 +50,7 @@ function Navbar() {
         <nav className="hidden lg:flex items-center space-x-8 text-sm uppercase tracking-widest text-earth-700 font-medium">
           <NavLink to="/donate" className={donateLinkClass}>Donate</NavLink>
           <Pipe />
-          <NavLink to="/publications" className={navLinkClass}>Publications</NavLink>
+          <NavLink to="/news" className={navLinkClass}>News</NavLink>
           <Pipe />
           <NavLink to="/reports" className={navLinkClass}>Reports</NavLink>
         </nav>

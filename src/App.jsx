@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom'
+import { lazy, Suspense } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/layout/Navbar.jsx'
 import Footer from './components/layout/Footer.jsx'
 import ScrollToTop from './components/shared/ScrollToTop.jsx'
@@ -6,10 +7,35 @@ import Home from './pages/Home.jsx'
 import Team from './pages/Team.jsx'
 import AboutUs from './pages/AboutUs.jsx'
 import Donate from './pages/Donate.jsx'
-import Publications from './pages/Publications.jsx'
+import News from './pages/News.jsx'
 import Reports from './pages/Reports.jsx'
 
+// Lazy-load: public visitors never download the admin bundle.
+const AdminApp = lazy(() => import('./admin/AdminApp.jsx'))
+
+function AdminLoading() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-sand-50">
+      <span className="text-earth-600 font-mono text-xs tracking-widest uppercase">
+        Loading admin…
+      </span>
+    </div>
+  )
+}
+
 function App() {
+  const { pathname } = useLocation()
+
+  // The admin surface is its own app — no public Navbar/Footer, its own auth,
+  // its own layout. Split it off so nothing about the public site changes.
+  if (pathname.startsWith('/admin')) {
+    return (
+      <Suspense fallback={<AdminLoading />}>
+        <AdminApp />
+      </Suspense>
+    )
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-sand-50 text-sand-900 font-sans antialiased">
       <ScrollToTop />
@@ -20,7 +46,7 @@ function App() {
           <Route path="/team" element={<Team />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/donate" element={<Donate />} />
-          <Route path="/publications" element={<Publications />} />
+          <Route path="/news" element={<News />} />
           <Route path="/reports" element={<Reports />} />
         </Routes>
       </main>

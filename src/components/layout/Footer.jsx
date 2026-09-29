@@ -9,7 +9,7 @@ const exploreLinks = [
   { to: '/team', label: 'Team' },
   { to: '/about', label: 'About Us' },
   { to: '/donate', label: 'Donate' },
-  { to: '/publications', label: 'Publications' },
+  { to: '/news', label: 'News' },
   { to: '/reports', label: 'Reports' },
 ]
 

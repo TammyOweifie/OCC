@@ -1,25 +1,25 @@
-// Sanity-backed publications fetcher.
-// -----------------------------------
-// Returns publications in the SAME shape currently exported from
-// src/data/publications.js:
+// Sanity-backed news fetcher.
+// ---------------------------
+// Returns news posts in the SAME shape currently exported from
+// src/data/news.js:
 //   { id, title, date, excerpt, body, coverImage, coverAlt }
 //
 // This is a drop-in replacement for that static array. Swapping it in
 // later is a ~one-line change wherever the data is imported — the page
-// component (src/pages/Publications.jsx) does not need to change.
+// component (src/pages/News.jsx) does not need to change.
 //
 //   Current (static):
-//     import { publications } from '../data/publications.js'
+//     import { news } from '../data/news.js'
 //   Future (Sanity):
-//     import { getPublicationsFromSanity } from '../data/getPublicationsFromSanity.js'
-//     const publications = await getPublicationsFromSanity()
+//     import { getNewsFromSanity } from '../data/getNewsFromSanity.js'
+//     const news = await getNewsFromSanity()
 //
 // NOT consumed by any page yet — this file exists purely as CMS-prep
 // infrastructure on the cms-prep branch. Live site is untouched.
 
 import { sanityClient } from '../lib/sanityClient.js'
 
-const QUERY = /* groq */ `*[_type == "publication"] | order(date desc) {
+const QUERY = /* groq */ `*[_type == "newsPost"] | order(date desc) {
   "id": slug.current,
   title,
   date,
@@ -31,7 +31,7 @@ const QUERY = /* groq */ `*[_type == "publication"] | order(date desc) {
 
 // Portable Text (Sanity's block content) is an array of block objects.
 // Each block has a `children` array of spans; each span has a `.text`.
-// The Publications page expects `body` as an array of paragraph strings,
+// The News page expects `body` as an array of paragraph strings,
 // so we flatten each block into a single string.
 function flattenPortableText(body) {
   if (!Array.isArray(body)) return []
@@ -44,15 +44,15 @@ function flattenPortableText(body) {
     .filter(Boolean)
 }
 
-export async function getPublicationsFromSanity() {
+export async function getNewsFromSanity() {
   if (!sanityClient) {
     throw new Error(
       'Sanity client not configured. Set VITE_SANITY_PROJECT_ID in .env.local.'
     )
   }
   const raw = await sanityClient.fetch(QUERY)
-  return raw.map((pub) => ({
-    ...pub,
-    body: flattenPortableText(pub.body),
+  return raw.map((post) => ({
+    ...post,
+    body: flattenPortableText(post.body),
   }))
 }

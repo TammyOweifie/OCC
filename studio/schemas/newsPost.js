@@ -1,6 +1,6 @@
-// Publication schema
-// ------------------
-// Matches the shape currently exported from src/data/publications.js:
+// News post schema
+// ----------------
+// Matches the shape currently exported from src/data/news.js:
 //   { id, title, date, excerpt, body, coverImage, coverAlt }
 //
 // Field-to-current-data mapping:
@@ -12,8 +12,8 @@
 //   body       → body (portable text; flattened to string[] in the fetch fn)
 
 export default {
-  name: 'publication',
-  title: 'Publication',
+  name: 'newsPost',
+  title: 'News post',
   type: 'document',
   fields: [
     {
