@@ -158,8 +158,7 @@ function Home() {
             </ScrollReveal>
             <ScrollReveal delay={0.3}>
               <p>
-                Twenty-four years on, this remains our foundation: strengthening that relationship, and empowering the people who are already the forest's best guardians.
-              </p>
+                Over two decades on this remains our foundation: strengthening that relationship, and empowering the people who are already the forest's best guardians.              </p>
             </ScrollReveal>
           </div>
         </div>
