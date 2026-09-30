@@ -30,12 +30,21 @@ function SectionCard({ title, count, to, description }) {
 
 export default function Dashboard() {
   const [newsCount, setNewsCount] = useState(null)
-  // Reports count is TODO (Reports admin comes in the next round)
+  const [reportsCount, setReportsCount] = useState(null)
+  const [galleryCount, setGalleryCount] = useState(null)
 
   useEffect(() => {
     adminApi.listNews()
       .then(({ posts }) => setNewsCount(posts.length))
       .catch(() => setNewsCount(null))
+    adminApi.listReports()
+      .then(({ reports }) => setReportsCount(reports.length))
+      .catch(() => setReportsCount(null))
+    if (adminApi.listGallery) {
+      adminApi.listGallery()
+        .then(({ images }) => setGalleryCount(images.length))
+        .catch(() => setGalleryCount(null))
+    }
   }, [])
 
   return (
@@ -47,7 +56,7 @@ export default function Dashboard() {
         Dashboard
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <SectionCard
           title="News"
           description="Stories & field notes"
@@ -57,14 +66,16 @@ export default function Dashboard() {
         <SectionCard
           title="Reports"
           description="Progress reports & PDFs"
-          count={null}
+          count={reportsCount}
           to="/admin/reports"
         />
+        <SectionCard
+          title="Gallery"
+          description="Photos of OCC & the plateau"
+          count={galleryCount}
+          to="/admin/gallery"
+        />
       </div>
-
-      <p className="mt-10 text-xs font-mono text-earth-600">
-        Reports admin is next — pattern will match News.
-      </p>
     </div>
   )
 }

@@ -54,6 +54,36 @@ export const adminApi = {
     }),
   deleteNewsPost: id =>
     request(`/api/admin/news/${id}`, { method: 'DELETE' }),
+
+  listReports: () => request('/api/admin/reports'),
+  getReport: id => request(`/api/admin/reports/${id}`),
+  createReport: payload =>
+    request('/api/admin/reports', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+  updateReport: (id, payload) =>
+    request(`/api/admin/reports/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(payload),
+    }),
+  deleteReport: id =>
+    request(`/api/admin/reports/${id}`, { method: 'DELETE' }),
+
+  listGallery: () => request('/api/admin/gallery'),
+  getGalleryImage: id => request(`/api/admin/gallery/${id}`),
+  createGalleryImage: payload =>
+    request('/api/admin/gallery', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+  updateGalleryImage: (id, payload) =>
+    request(`/api/admin/gallery/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(payload),
+    }),
+  deleteGalleryImage: id =>
+    request(`/api/admin/gallery/${id}`, { method: 'DELETE' }),
 }
 
 // Read a File as a data URL (base64) for upload payloads.
