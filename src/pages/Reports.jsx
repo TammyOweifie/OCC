@@ -2,7 +2,8 @@
 import Button from '../components/ui/Button.jsx'
 import SectionHeading from '../components/ui/SectionHeading.jsx'
 import ScrollReveal from '../components/shared/ScrollReveal.jsx'
-import { reports } from '../data/reports.js'
+import { getReportsFromSanity } from '../data/getReportsFromSanity.js'
+import { useSanityData } from '../lib/useSanityData.js'
 
 function DownloadLink({ href }) {
   return (
@@ -32,6 +33,8 @@ function DownloadLink({ href }) {
 }
 
 function Reports() {
+  const { data: reports, loading } = useSanityData(getReportsFromSanity)
+
   return (
     <>
       {/* Page Heading */}
@@ -45,6 +48,24 @@ function Reports() {
 
       {/* Report Entries */}
       <section className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 pb-28">
+        {loading ? (
+          <div className="border-t border-sand-200 py-24 text-center">
+            <span className="font-mono text-xs uppercase tracking-widest text-earth-600">
+              Loading…
+            </span>
+          </div>
+        ) : reports.length === 0 ? (
+          <ScrollReveal>
+            <div className="border-t border-sand-200 py-24 text-center">
+              <span className="font-mono text-xs uppercase tracking-widest text-earth-600 block mb-3">
+                Coming Soon
+              </span>
+              <p className="text-earth-700 font-light max-w-md mx-auto leading-relaxed">
+                Progress reports and field summaries will appear here as they&apos;re published.
+              </p>
+            </div>
+          </ScrollReveal>
+        ) : (
         <div className="border-t border-sand-200 divide-y divide-sand-200">
           {reports.map((report, i) => (
             <ScrollReveal key={report.id} delay={i * 0.1}>
@@ -63,7 +84,12 @@ function Reports() {
                   )}
                   <div className="flex-1 flex flex-col justify-between">
                     <div className="space-y-4 text-earth-700 text-base sm:text-[17px] leading-relaxed font-sans font-normal">
-                      <p>{report.body}</p>
+                      {(report.body || '')
+                        .split(/\n\s*\n/)
+                        .filter(Boolean)
+                        .map((para, j) => (
+                          <p key={j}>{para}</p>
+                        ))}
                     </div>
                     {report.downloadUrl && (
                       <div className="pt-6 sm:pt-8 mt-2">
@@ -76,6 +102,7 @@ function Reports() {
             </ScrollReveal>
           ))}
         </div>
+        )}
       </section>
 
       {/* Closing CTA */}

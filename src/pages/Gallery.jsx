@@ -4,10 +4,11 @@ import Button from '../components/ui/Button.jsx'
 import SectionHeading from '../components/ui/SectionHeading.jsx'
 import ScrollReveal from '../components/shared/ScrollReveal.jsx'
 import Lightbox from '../components/shared/Lightbox.jsx'
-import { getGallery } from '../data/gallery.js'
+import { getGalleryFromSanity } from '../data/getGalleryFromSanity.js'
+import { useSanityData } from '../lib/useSanityData.js'
 
 function Gallery() {
-  const images = getGallery()
+  const { data: images, loading } = useSanityData(getGalleryFromSanity)
   const [lightboxIndex, setLightboxIndex] = useState(null)
 
   const openAt = (i) => setLightboxIndex(i)
@@ -31,7 +32,13 @@ function Gallery() {
 
       {/* Photo Grid */}
       <section className="max-w-6xl mx-auto px-6 sm:px-12 pb-24 sm:pb-32">
-        {images.length === 0 ? (
+        {loading ? (
+          <div className="border-t border-sand-200 py-24 text-center">
+            <span className="font-mono text-xs uppercase tracking-widest text-earth-600">
+              Loading…
+            </span>
+          </div>
+        ) : images.length === 0 ? (
           <ScrollReveal>
             <div className="border-t border-sand-200 py-24 text-center">
               <span className="font-mono text-xs uppercase tracking-widest text-earth-600 block mb-3">

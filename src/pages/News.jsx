@@ -5,7 +5,8 @@ import Card from '../components/ui/Card.jsx'
 import SectionHeading from '../components/ui/SectionHeading.jsx'
 import Modal from '../components/shared/Modal.jsx'
 import ScrollReveal from '../components/shared/ScrollReveal.jsx'
-import { news } from '../data/news.js'
+import { getNewsFromSanity } from '../data/getNewsFromSanity.js'
+import { useSanityData } from '../lib/useSanityData.js'
 
 function formatDate(iso) {
   return new Date(iso).toLocaleDateString('en-US', {
@@ -16,6 +17,7 @@ function formatDate(iso) {
 
 function News() {
   const [selected, setSelected] = useState(null)
+  const { data: news, loading } = useSanityData(getNewsFromSanity)
 
   return (
     <>
@@ -35,7 +37,13 @@ function News() {
 
       {/* Card Grid */}
       <section className="max-w-6xl mx-auto px-6 sm:px-12 pb-24 sm:pb-32">
-        {news.length === 0 ? (
+        {loading ? (
+          <div className="border-t border-sand-200 py-24 text-center">
+            <span className="font-mono text-xs uppercase tracking-widest text-earth-600">
+              Loading…
+            </span>
+          </div>
+        ) : news.length === 0 ? (
           <ScrollReveal>
             <div className="border-t border-sand-200 py-24 text-center">
               <span className="font-mono text-xs uppercase tracking-widest text-earth-600 block mb-3">
