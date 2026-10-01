@@ -8,6 +8,7 @@
 import { useCallback, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { adminApi, fileToDataUrl } from './api.js'
+import { resizeImageIfLarge } from './imageResize.js'
 
 function uid() {
   return Math.random().toString(36).slice(2, 10)
@@ -23,14 +24,17 @@ export default function GalleryUpload() {
   const addFiles = useCallback(async (fileList) => {
     const files = [...fileList].filter(f => f.type.startsWith('image/'))
     if (files.length === 0) return
-    const withData = await Promise.all(files.map(async f => ({
-      id: uid(),
-      file: f,
-      dataUrl: await fileToDataUrl(f),
-      alt: '',
-      status: 'queued',
-      error: '',
-    })))
+    const withData = await Promise.all(files.map(async f => {
+      const resized = await resizeImageIfLarge(f)
+      return {
+        id: uid(),
+        file: resized,
+        dataUrl: await fileToDataUrl(resized),
+        alt: '',
+        status: 'queued',
+        error: '',
+      }
+    }))
     setItems(prev => [...prev, ...withData])
   }, [])
 

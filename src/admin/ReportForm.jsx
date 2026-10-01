@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { adminApi, fileToDataUrl } from './api.js'
+import { resizeImageIfLarge } from './imageResize.js'
 
 const EMPTY = {
   title: '',
@@ -60,8 +61,9 @@ export default function ReportForm() {
   async function handleImageChange(e) {
     const file = e.target.files?.[0]
     if (!file) return
-    const dataUrl = await fileToDataUrl(file)
-    setForm(f => ({ ...f, image: { file, dataUrl } }))
+    const resized = await resizeImageIfLarge(file)
+    const dataUrl = await fileToDataUrl(resized)
+    setForm(f => ({ ...f, image: { file: resized, dataUrl } }))
   }
 
   async function handleFileChange(e) {
