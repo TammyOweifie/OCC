@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { adminApi, fileToDataUrl } from './api.js'
-import { resizeImageIfLarge } from './imageResize.js'
+import { resizeImageIfLarge, checkFileSize } from './imageResize.js'
 
 const EMPTY = {
   title: '',
@@ -62,6 +62,13 @@ export default function ReportForm() {
     const file = e.target.files?.[0]
     if (!file) return
     const resized = await resizeImageIfLarge(file)
+    const sizeError = checkFileSize(resized)
+    if (sizeError) {
+      setError(sizeError)
+      e.target.value = ''
+      return
+    }
+    setError('')
     const dataUrl = await fileToDataUrl(resized)
     setForm(f => ({ ...f, image: { file: resized, dataUrl } }))
   }
@@ -69,6 +76,14 @@ export default function ReportForm() {
   async function handleFileChange(e) {
     const file = e.target.files?.[0]
     if (!file) return
+    // PDFs aren't resized, so the size check matters a lot here.
+    const sizeError = checkFileSize(file)
+    if (sizeError) {
+      setError(sizeError)
+      e.target.value = ''
+      return
+    }
+    setError('')
     const dataUrl = await fileToDataUrl(file)
     setForm(f => ({ ...f, file: { file, dataUrl }, removeExistingFile: false }))
   }
@@ -203,7 +218,7 @@ export default function ReportForm() {
           />
         </Field>
 
-        <Field label="Downloadable file (optional)" help="PDF or similar. Attach if this report has one.">
+        <Field label="Downloadable file (optional)" help="PDF or similar — up to 3 MB. Attach if this report has one. Shrink large PDFs with a tool like Smallpdf before uploading.">
           {hasExistingFile && !form.file && (
             <div className="mb-3 flex items-center justify-between border border-sand-200 bg-sand-50 px-4 py-3 text-sm">
               <span className="text-earth-700 font-light">

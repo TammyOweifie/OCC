@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { adminApi, fileToDataUrl } from './api.js'
-import { resizeImageIfLarge } from './imageResize.js'
+import { resizeImageIfLarge, checkFileSize } from './imageResize.js'
 
 function slugify(str) {
   return (str || '')
@@ -70,6 +70,13 @@ export default function NewsForm() {
     const file = e.target.files?.[0]
     if (!file) return
     const resized = await resizeImageIfLarge(file)
+    const sizeError = checkFileSize(resized)
+    if (sizeError) {
+      setError(sizeError)
+      e.target.value = ''
+      return
+    }
+    setError('')
     const dataUrl = await fileToDataUrl(resized)
     setForm(f => ({ ...f, thumbnail: { file: resized, dataUrl } }))
   }

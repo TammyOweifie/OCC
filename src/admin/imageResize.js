@@ -1,5 +1,5 @@
-// Client-side image resize before upload.
-// ---------------------------------------
+// Client-side image resize before upload + size-cap helpers.
+// ----------------------------------------------------------
 // Vercel's serverless functions have a ~4.5 MB request body limit.
 // A 3 MB JPEG becomes ~4 MB after base64 encoding, which is already
 // over the ceiling once headers are counted. Resizing in the browser
@@ -9,6 +9,32 @@
 // Default target: 2000px on the longest side, JPEG quality 0.85.
 // Images already smaller than that pass through untouched (we keep the
 // original file to avoid pointless re-encoding losses).
+
+// Raw file size cap. Base64 inflates bytes by ~33%, so a 3 MB file
+// becomes ~4 MB in the request body — leaves headroom under Vercel's
+// 4.5 MB serverless limit.
+export const MAX_UPLOAD_BYTES = 3 * 1024 * 1024
+
+export function formatBytes(bytes) {
+  if (bytes < 1024) return `${bytes} B`
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`
+  return `${(bytes / 1024 / 1024).toFixed(1)} MB`
+}
+
+// Returns null if the file is fine, or a human-readable error string.
+// Used to surface the problem to OCC staff before the request fails
+// at the server with a cryptic 413.
+export function checkFileSize(file, maxBytes = MAX_UPLOAD_BYTES) {
+  if (!file) return null
+  if (file.size > maxBytes) {
+    return (
+      `"${file.name}" is ${formatBytes(file.size)}. ` +
+      `Max upload size is ${formatBytes(maxBytes)}. ` +
+      `Shrink the file (e.g. export at smaller dimensions or lower quality) and try again.`
+    )
+  }
+  return null
+}
 
 export async function resizeImageIfLarge(
   file,

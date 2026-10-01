@@ -10,6 +10,18 @@ async function request(path, opts = {}) {
   })
   if (res.status === 204) return null
 
+  // 413: Vercel rejected the body before our function ran. The response
+  // is a plain-text error page, not JSON. Translate it to something OCC
+  // staff can act on.
+  if (res.status === 413) {
+    const err = new Error(
+      'File too large — the upload exceeded the ~4.5 MB request limit. ' +
+      'Shrink the file (export at smaller dimensions, or compress the PDF) and try again.'
+    )
+    err.status = 413
+    throw err
+  }
+
   const contentType = res.headers.get('content-type') || ''
   const isJson = contentType.includes('application/json')
 

@@ -8,7 +8,7 @@
 import { useCallback, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { adminApi, fileToDataUrl } from './api.js'
-import { resizeImageIfLarge } from './imageResize.js'
+import { resizeImageIfLarge, checkFileSize } from './imageResize.js'
 
 function uid() {
   return Math.random().toString(36).slice(2, 10)
@@ -25,14 +25,18 @@ export default function GalleryUpload() {
     const files = [...fileList].filter(f => f.type.startsWith('image/'))
     if (files.length === 0) return
     const withData = await Promise.all(files.map(async f => {
+      // Resize what we can, then check the result against the cap.
+      // Oversized rows join the queue as pre-failed with a clear reason
+      // so the user sees exactly which file was rejected and why.
       const resized = await resizeImageIfLarge(f)
+      const sizeError = checkFileSize(resized)
       return {
         id: uid(),
         file: resized,
         dataUrl: await fileToDataUrl(resized),
         alt: '',
-        status: 'queued',
-        error: '',
+        status: sizeError ? 'failed' : 'queued',
+        error: sizeError || '',
       }
     }))
     setItems(prev => [...prev, ...withData])
@@ -62,6 +66,12 @@ export default function GalleryUpload() {
     // Only try items that haven't already succeeded
     const pending = items.filter(it => it.status !== 'done')
     for (const item of pending) {
+      // Re-check size — if still over the cap, skip the request entirely.
+      const sizeError = checkFileSize(item.file)
+      if (sizeError) {
+        setItems(prev => prev.map(it => it.id === item.id ? { ...it, status: 'failed', error: sizeError } : it))
+        continue
+      }
       setItems(prev => prev.map(it => it.id === item.id ? { ...it, status: 'uploading', error: '' } : it))
       try {
         await adminApi.createGalleryImage({
