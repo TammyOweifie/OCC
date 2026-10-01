@@ -9,6 +9,7 @@ import Donate from './pages/Donate.jsx'
 import News from './pages/News.jsx'
 import Reports from './pages/Reports.jsx'
 import Gallery from './pages/Gallery.jsx'
+import FoundersStory from './pages/FoundersStory.jsx'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/news" element={<News />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route path="/founders-story" element={<FoundersStory />} />
         </Routes>
       </main>
       <Footer />

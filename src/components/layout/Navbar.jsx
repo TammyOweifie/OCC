@@ -23,6 +23,7 @@ const mobileLinks = [
 ]
 
 const aboutSubLinks = [
+  { to: '/founders-story', label: "Founder's Story" },
   { to: '/gallery', label: 'Gallery' },
 ]
 
@@ -71,7 +72,7 @@ function AboutDropdown({ isAboutActive }) {
           open ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       >
-        <ul className="min-w-[9rem] bg-sand-50 border border-sand-200/70 py-2">
+        <ul className="min-w-[12rem] bg-sand-50 border border-sand-200/70 py-2 whitespace-nowrap">
           {aboutSubLinks.map(({ to, label }) => (
             <li key={to}>
               <NavLink
@@ -155,8 +156,11 @@ function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const { pathname } = useLocation()
 
-  // About Us reads as active when on /about OR anywhere under /gallery.
-  const isAboutActive = pathname === '/about' || pathname.startsWith('/gallery')
+  // About Us reads as active when on /about, /founders-story or /gallery.
+  const isAboutActive =
+    pathname === '/about' ||
+    pathname === '/founders-story' ||
+    pathname.startsWith('/gallery')
 
   return (
     <header className="sticky top-0 z-50 bg-sand-50/90 backdrop-blur-md border-b border-sand-200/70 transition-all duration-300">
