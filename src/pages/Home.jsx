@@ -8,9 +8,12 @@ import VideoEmbed from '../components/shared/VideoEmbed.jsx'
 import { partners } from '../data/partners.js'
 
 const heroSlides = [
-  { src: '/assets/images/home/bg-hero.png', alt: 'The Grotto, Obudu Plateau' },
+  { src: '/assets/images/home/bg-hero.jpg', alt: 'The Grotto, Obudu Plateau' },
   { src: '/assets/images/home/bg-hero2.jpg', alt: 'Obudu Mountain Ranges' },
   { src: '/assets/images/home/bg-hero1.jpg', alt: 'Obudu Valley and Forests' },
+  { src: '/assets/images/home/bg-hero3.jpg', alt: 'Obudu Plateau landscape' },
+  { src: '/assets/images/home/bg-hero4.jpg', alt: 'Obudu Plateau landscape' },
+  { src: '/assets/images/home/bg-hero5.jpg', alt: 'Obudu Plateau landscape' },
 ]
 
 function Home() {
@@ -155,8 +158,7 @@ function Home() {
             </ScrollReveal>
             <ScrollReveal delay={0.3}>
               <p>
-                Twenty-four years on, this remains our foundation: strengthening that relationship, and empowering the people who are already the forest's best guardians.
-              </p>
+                Over two decades on this remains our foundation: strengthening that relationship, and empowering the people who are already the forest's best guardians.              </p>
             </ScrollReveal>
           </div>
         </div>

@@ -8,6 +8,8 @@ const exploreLinks = [
   { to: '/', label: 'Home', end: true },
   { to: '/team', label: 'Team' },
   { to: '/about', label: 'About Us' },
+  { to: '/founders-story', label: "Founder's Story" },
+  { to: '/gallery', label: 'Gallery' },
   { to: '/donate', label: 'Donate' },
   { to: '/news', label: 'News' },
   { to: '/reports', label: 'Reports' },
@@ -60,13 +62,11 @@ function Footer() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-stone-800 items-start">
           <div className="md:col-span-4 lg:col-span-5">
-            <div className="bg-white p-2 inline-block mb-6">
-              <img
-                src="/assets/logos/occ-logo.png"
-                alt="Obudu Conservation Centre"
-                className="h-10 w-auto object-contain"
-              />
-            </div>
+            <img
+              src="/assets/logos/occ-logo.png"
+              alt="Obudu Conservation Centre"
+              className="h-16 sm:h-20 w-auto object-contain mb-6 brightness-0 invert"
+            />
             <p className="text-xs text-stone-400 font-serif leading-relaxed max-w-sm">
               Dedicated to protecting, educating, and restoring the irreplaceable biodiversity of the Obudu Plateau and Cross River National Park in Nigeria.
             </p>
