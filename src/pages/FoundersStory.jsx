@@ -71,7 +71,7 @@ function FoundersStory() {
       {/* Page Heading */}
       <section className="max-w-6xl mx-auto px-6 sm:px-12 pt-16 sm:pt-20 pb-10">
         <ScrollReveal>
-          <div className="max-w-3xl">
+          <div className="max-w-3xl mx-auto">
             <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-sand-900 mb-4">
               {meta.pageTitle}
             </h1>
@@ -82,18 +82,20 @@ function FoundersStory() {
         </ScrollReveal>
       </section>
 
-      {/* Opening: lead paragraph, then portrait below */}
+      {/* Opening: lead paragraph, then portrait below.
+          Both constrained to the same max-width and centered as one
+          column so the image matches the paragraph's width. */}
       <section className="max-w-6xl mx-auto px-6 sm:px-12 pb-16 sm:pb-24">
-        <div className="max-w-3xl mb-10 sm:mb-14">
+        <div className="max-w-3xl mx-auto">
           <ScrollReveal>
-            <p className="text-earth-700 text-lg sm:text-xl leading-relaxed font-light">
+            <p className="text-earth-700 text-lg sm:text-xl leading-relaxed font-light mb-10 sm:mb-14">
               {opening}
             </p>
           </ScrollReveal>
+          <ScrollReveal delay={0.1}>
+            <Portrait portrait={meta.portrait} />
+          </ScrollReveal>
         </div>
-        <ScrollReveal delay={0.1}>
-          <Portrait portrait={meta.portrait} />
-        </ScrollReveal>
       </section>
 
       {/* Story sections in a comfortable reading column */}
