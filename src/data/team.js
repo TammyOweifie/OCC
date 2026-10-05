@@ -10,7 +10,7 @@ export const coreTeam = [
     name: 'Eyituoyo Ofuya',
     role: 'Research Associate / Ecologist',
     photo: '/assets/images/team/tuoyo.jpeg',
-    bio: 'Eyituoyo Ofuya is a Research Associate/Ecologist with the Obudu Conservation Centre. He holds a PhD degree in Biodiversity Management from The Federal University Technology Akure. He is a nature enthusiast with special interest in primate conservation. At OCC he is responsible for designing and implementing field surveys, training field assistants, liaising with local stakeholders and presenting research output. He is a member of the Global Environments Network (GEN), Nigerian Primatological Society (NiPS) and American Society of Primatologists (ASP).',
+    bio: 'Eyituoyo Ofuya is a Research Associate/Ecologist with the Obudu Conservation Centre. He holds a PhD degree in Biodiversity Management from The Federal University Technology Akure. He is a nature enthusiast with special interest in primate conservation. At OCC he is responsible for designing and implementing field surveys, training field assistants, liaising with local stakeholders and presenting research output. He is a member of the Global Environments Network (GEN), Nigerian Primatological Society (NiPS), African Primatological Society (APS),and American Society of Primatologists (ASP).',
   },
   {
     name: 'Dr. Kevin Eyos Acha',
@@ -28,7 +28,7 @@ export const coreTeam = [
 
 export const boardMembers = [
   {
-    name: 'Owanari Duke',
+    name: 'Onari Duke',
     title: 'Board Member / Trustee',
     focus: 'Advisory · Community Leadership',
   },

@@ -18,16 +18,16 @@
 const founderStory = {
   meta: {
     pageTitle: "The Founder's Story",
-    name: 'Mrs. Owanari Duke',
+    name: 'Mrs Onari Duke',
     role: 'Founder',
     portrait: {
       src: '/assets/images/about/founders-story.jpg',
-      alt: 'Mrs. Owanari Duke with colleagues at an Obudu Conservation Centre event',
+      alt: 'Mrs Onari Duke with colleagues at an Obudu Conservation Centre event',
     },
   },
 
   opening:
-    'In January 2002, when Owanari Duke founded the Obudu Conservation Educational Centre, conservation was not part of Nigeria’s national conversation. Few people talked about biodiversity loss. The country’s disappearing forests drew little public concern, and there was no shared sense that wildlife and wild lands deserved protection. Mrs. Duke was not answering a public demand. She set out to create one.',
+    'In January 2002, when Onari Duke founded the Obudu Conservation Educational Centre, conservation was not part of Nigeria’s national conversation. Few people talked about biodiversity loss. The country’s disappearing forests drew little public concern, and there was no shared sense that wildlife and wild lands deserved protection. Mrs Duke was not answering a public demand. She set out to create one.',
 
   sections: [
     {
@@ -40,7 +40,7 @@ const founderStory = {
     {
       heading: 'A decade of programmes',
       paragraphs: [
-        'Over the following decade, Mrs. Duke built programmes that turned that conviction into practice:',
+        'Over the following decade, Mrs Duke built programmes that turned that conviction into practice:',
       ],
       list: [
         {
@@ -66,7 +66,7 @@ const founderStory = {
     {
       heading: 'Her work today',
       paragraphs: [
-        'Mrs. Duke remains a leading voice for conservation in Nigeria. She serves on the board of trustees for the Nigerian Conservation Foundation and chairs its finance committee. There she advocates for policies that strengthen climate resilience and protect Nigeria’s most vulnerable communities.',
+        'Mrs Duke remains a leading voice for conservation in Nigeria. She serves on the board of trustees for the Nigerian Conservation Foundation and chairs its finance committee. There she advocates for policies that strengthen climate resilience and protect Nigeria’s most vulnerable communities.',
       ],
     },
   ],

@@ -82,18 +82,18 @@ function FoundersStory() {
         </ScrollReveal>
       </section>
 
-      {/* Opening: portrait + lead paragraph */}
+      {/* Opening: lead paragraph, then portrait below */}
       <section className="max-w-6xl mx-auto px-6 sm:px-12 pb-16 sm:pb-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
+        <div className="max-w-3xl mb-10 sm:mb-14">
           <ScrollReveal>
-            <Portrait portrait={meta.portrait} />
-          </ScrollReveal>
-          <ScrollReveal delay={0.15}>
             <p className="text-earth-700 text-lg sm:text-xl leading-relaxed font-light">
               {opening}
             </p>
           </ScrollReveal>
         </div>
+        <ScrollReveal delay={0.1}>
+          <Portrait portrait={meta.portrait} />
+        </ScrollReveal>
       </section>
 
       {/* Story sections in a comfortable reading column */}
