@@ -1,12 +1,14 @@
-// Sanity client — CMS prep, NOT wired into any page yet.
-// -------------------------------------------------------
-// Reads its config from Vite env vars in .env.local (gitignored).
-// Until VITE_SANITY_PROJECT_ID is set, `sanityClient` is null and
-// any attempt to call `.fetch(...)` from a caller must guard for that.
+// Sanity client used by public pages to read content.
+// ----------------------------------------------------
+// Reads its config from Vite env vars (VITE_SANITY_PROJECT_ID /
+// VITE_SANITY_DATASET). Until those are set the client is null and
+// any attempt to call `.fetch(...)` must guard for that.
 //
-// See src/data/getNewsFromSanity.js and
-// src/data/getReportsFromSanity.js for how this is intended to be used
-// once the CMS is commissioned.
+// useCdn is false on purpose. The CDN caches reads for ~60 seconds,
+// which was causing deletes/edits made from the admin to not reflect
+// on the public pages for a minute afterwards. The live API is a few
+// hundred ms slower per request but always fresh — the right default
+// for a low-traffic site whose staff expect immediate feedback.
 
 import { createClient } from '@sanity/client'
 import imageUrlBuilder from '@sanity/image-url'
@@ -20,7 +22,7 @@ export const sanityClient = projectId
       projectId,
       dataset,
       apiVersion,
-      useCdn: true,
+      useCdn: false,
     })
   : null
 
