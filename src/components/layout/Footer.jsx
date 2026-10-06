@@ -8,6 +8,8 @@ const exploreLinks = [
   { to: '/', label: 'Home', end: true },
   { to: '/team', label: 'Team' },
   { to: '/about', label: 'About Us' },
+  { to: '/founders-story', label: "Founder's Story" },
+  { to: '/gallery', label: 'Gallery' },
   { to: '/donate', label: 'Donate' },
   { to: '/news', label: 'News' },
   { to: '/reports', label: 'Reports' },
