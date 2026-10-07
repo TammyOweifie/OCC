@@ -148,14 +148,13 @@ The `--replace` flag deletes existing content first and then imports the backup.
 
 **Important**: `--replace` is destructive and irreversible without another backup. Confirm you have the right file before running it.
 
-### Recommended rhythm
+### Backup rhythm
 
-**TODO: confirm** — this project doesn't yet have a scheduled backup job. Options OCC might consider:
+**Current policy**: manual monthly export. Once per month, someone with Sanity access runs `npx sanity dataset export` as described above and uploads the resulting `.tar.gz` to OCC-controlled storage (OCC's Google Drive is a sensible default; keep the backups folder access-restricted). Keep at least the last two monthly exports so a bad backup doesn't overwrite your only good copy.
 
-- **Manual monthly export** — a staff member runs the export once a month, uploads the `.tar.gz` to Dropbox / Google Drive / wherever OCC keeps records
-- **Automated weekly export** — a Vercel cron or a small GitHub Action that runs the export and uploads to cloud storage. ~1 hour of work to set up.
+Monthly matches OCC's actual pace of content change (news posts and reports are infrequent; gallery updates likewise). More frequent manual exports are reasonable if content starts changing weekly.
 
-Either way, keep at least two generations of backup so a bad export doesn't overwrite your only good copy.
+If backup volume or frequency grows, automate it: a GitHub Action running on a weekly cron can call `npx sanity dataset export` with the `SANITY_WRITE_TOKEN` and push the result to cloud storage. About an hour of work to set up — not needed today.
 
 ## When to touch schemas vs. when to touch content
 

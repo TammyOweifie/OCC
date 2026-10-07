@@ -73,4 +73,4 @@ Permits commercial use, modification and distribution. Adds explicit patent-gran
 - **Partner logos** in `public/assets/logos/partners/` — these are third-party trademarks (BirdLife, CERCOPAN, Rufford Foundation, etc.) displayed with OCC's permission as partnership identifiers. They are not licensed to OCC as general assets.
 - **Photos** in Sanity's asset store — ownership and licensing of individual photographs is OCC's responsibility to track.
 
-**TODO: confirm** — if OCC has written agreements with photographers or partner organisations about image/logo usage, keep them with this documentation.
+Agreements with photographers and partner organisations about image/logo usage are **maintained by OCC in their own records**, outside this repository. If anyone needs to confirm the usage rights for a specific photo or logo, ask OCC.

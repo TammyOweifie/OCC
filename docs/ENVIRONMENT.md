@@ -202,6 +202,10 @@ Full step-by-step is in `docs/DEPLOYMENT.md`. The short version:
 5. Save
 6. After adding or editing any env var, trigger a redeploy: **Deployments → ⋯ (latest build) → Redeploy**
 
-## Confirmation note
+## Rotation policy
 
-**TODO: confirm** — in `docs/DEPLOYMENT.md` and `docs/CMS.md` the suggested rotation cadence for `SANITY_WRITE_TOKEN` and `ADMIN_PASSWORD_HASH` is left to OCC's discretion. If OCC has a security policy, document the cadence here.
+**Current policy**: no scheduled rotation. Rotate `SANITY_WRITE_TOKEN`, `ADMIN_PASSWORD_HASH` and `SESSION_SECRET` only on **staff turnover** (whoever had admin access leaves) or **suspected compromise** (a token or password is known to have leaked).
+
+This is the minimum viable posture for a single-admin NGO. If OCC later adopts a formal security policy with a mandated rotation cadence (e.g. "rotate every 90 days"), replace this section with the policy and set up a calendar reminder — the project itself has no scheduler.
+
+Rotation procedure for each variable is documented in its individual section above.

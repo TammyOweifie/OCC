@@ -34,7 +34,7 @@ Read **ARCHITECTURE.md** first — it gives you the mental model that makes the 
 
 ## Prerequisites
 
-- **Node.js**: v20 or newer. `TODO: confirm` — no `engines` field is set in `package.json`, so this is a recommendation based on what's known to work. Node 20 LTS is a safe target; the admin uses `node --env-file=…` style features that require Node 20+.
+- **Node.js**: v20 LTS or newer (pinned in `package.json` via `"engines"`). The admin uses `node --env-file=…` style features that require Node 20+; older versions will install but build or run commands may fail with cryptic errors. If you need to use an older Node for some other reason, loosen the pin in `package.json` and expect to work around the missing features.
 - **npm**: ships with Node (v10+)
 - Optional for full-stack local dev: the **Vercel CLI** (`npm install -g vercel`)
 

@@ -156,6 +156,16 @@ For a clean start — e.g. OCC's new developer sets up a fresh Vercel project fr
 - **Deploy succeeded but a page is blank** → check **Observability → Logs** for client-side errors reported by the Vercel runtime, or open the deployed page's DevTools Console directly.
 - **Env var changed but behaviour didn't update** → forgot to redeploy. Env var edits require a manual redeploy.
 
-## TODO
+## Build-failure notifications
 
-- **TODO: confirm** — if OCC wants to be paged on build failures, enable **Settings → Notifications → Deployment Failed** and pick an email address or Slack channel.
+Vercel can email a specified address whenever a build fails. For OCC, enable this to go to the same email configured in `ADMIN_EMAIL` (whoever runs the admin should also know when a deploy breaks).
+
+To enable or change the recipient:
+
+1. Vercel → **Settings → Notifications**
+2. Find **Deployment Failed** → toggle on → enter the email address (same as `ADMIN_EMAIL`)
+3. Save
+
+The alternative is a Slack webhook — set up on the same page if OCC prefers Slack over email.
+
+Builds succeed silently (no notification). Only failures trigger an alert.
