@@ -12,10 +12,9 @@
 //   2. Extract the leftmost square — the "O" logomark alone, without
 //      the text lockup. Readable at tiny sizes where the full lockup
 //      would be mush.
-//   3. Resize to each target with ~10% padding and composite onto a
-//      sand-50 opaque background (matches tailwind.config.js's
-//      `sand.50 = #FBF9F5`). Opaque so iOS doesn't fill transparency
-//      with a system-chosen colour on the home screen.
+//   3. Resize to each target with ~10% padding on a transparent
+//      background. Note: iOS adds its own backdrop (usually white or
+//      a dark system colour) to apple-touch-icon on home screens.
 //
 // Run with:  node scripts/generate-favicons.js
 
@@ -29,7 +28,7 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const SOURCE = resolve(ROOT, 'public/assets/logos/occ-logo.png')
 const OUT = resolve(ROOT, 'public')
 
-const SAND_50 = { r: 251, g: 249, b: 245, alpha: 1 } // tailwind.config.js
+const TRANSPARENT = { r: 0, g: 0, b: 0, alpha: 0 }
 const PADDING_RATIO = 0.1
 
 async function extractMark() {
@@ -43,10 +42,10 @@ async function makeIcon(markBuffer, size) {
   const padding = Math.round(size * PADDING_RATIO)
   const inner = size - padding * 2
   const scaledMark = await sharp(markBuffer)
-    .resize({ width: inner, height: inner, fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .resize({ width: inner, height: inner, fit: 'contain', background: TRANSPARENT })
     .toBuffer()
   return sharp({
-    create: { width: size, height: size, channels: 4, background: SAND_50 },
+    create: { width: size, height: size, channels: 4, background: TRANSPARENT },
   })
     .composite([{ input: scaledMark, top: padding, left: padding }])
     .png()
