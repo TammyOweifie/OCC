@@ -12,6 +12,7 @@ import Reports from './pages/Reports.jsx'
 import Gallery from './pages/Gallery.jsx'
 import FoundersStory from './pages/FoundersStory.jsx'
 import LaunchingSoon from './pages/LaunchingSoon.jsx'
+import NotFound from './pages/NotFound.jsx'
 import { useLaunchState } from './lib/useLaunchState.js'
 
 // Lazy-load: public visitors never download the admin bundle.
@@ -65,6 +66,7 @@ function PublicApp() {
           <Route path="/reports" element={<Reports />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/founders-story" element={<FoundersStory />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />

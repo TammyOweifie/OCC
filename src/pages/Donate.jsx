@@ -4,6 +4,7 @@ import Button from '../components/ui/Button.jsx'
 import SectionHeading from '../components/ui/SectionHeading.jsx'
 import ScrollReveal from '../components/shared/ScrollReveal.jsx'
 import Seo from '../components/shared/Seo.jsx'
+import { siteConfig } from '../lib/siteConfig.js'
 
 const BANK_CARD_ID = 'bank-transfer-card'
 
@@ -264,10 +265,10 @@ function Donate() {
                 <span className="font-semibold text-sand-900">Donor Notice:</span>{' '}
                 Please include your name or organization in the payment reference field. For donation receipts, tax documentation, or corporate sponsorship inquiries, kindly notify our team at{' '}
                 <a
-                  href="mailto:info@obuduconservation.org"
+                  href={`mailto:${siteConfig.email}`}
                   className="text-accent underline hover:text-accent-dark font-medium transition-colors"
                 >
-                  info@obuduconservation.org
+                  {siteConfig.email}
                 </a>{' '}
                 with your transaction details.
               </p>
