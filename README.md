@@ -19,6 +19,7 @@ Everything a new developer needs is in [`docs/`](./docs/):
 - [`docs/DEPLOYMENT.md`](./docs/DEPLOYMENT.md) — deploying on Vercel, env vars, custom domain, rollbacks
 - [`docs/CMS.md`](./docs/CMS.md) — Sanity schemas, upload flow, dataset export/restore
 - [`docs/LICENSES.md`](./docs/LICENSES.md) — every dependency and its licence
+- [`docs/DEVELOPER-TOOLS.md`](./docs/DEVELOPER-TOOLS.md) — declaration of any pre-existing developer code included in the project
 
 Read **ARCHITECTURE.md** first — it gives you the mental model that makes the rest easier.
 

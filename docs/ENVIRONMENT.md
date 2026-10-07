@@ -2,7 +2,9 @@
 
 Every variable the project reads at build time or at runtime. **This document contains no secret values** — only descriptions of what each variable is for and how to generate or find one. The real values live in Vercel's dashboard and (for local development) in `.env.local`.
 
-## The eight variables at a glance
+## Variables at a glance
+
+Eight required (six server + two client) and two optional:
 
 | Name | Where it runs | Type in Vercel | Required scope |
 |---|---|---|---|
@@ -14,6 +16,10 @@ Every variable the project reads at build time or at runtime. **This document co
 | `SESSION_SECRET` | Server (`/api/admin/*`) | Sensitive | Preview + Production |
 | `VITE_SANITY_PROJECT_ID` | Client (browser bundle) | **Config** | Preview + Production |
 | `VITE_SANITY_DATASET` | Client (browser bundle) | **Config** | Preview + Production |
+| `SANITY_API_VERSION` | Server (`/api/admin/*`) | Sensitive | Optional — has a default |
+| `VITE_SANITY_API_VERSION` | Client (browser bundle) | **Config** | Optional — has a default |
+
+Two further variables (`NODE_ENV`, `VERCEL`) are read by the serverless functions but set automatically by the runtime — you never configure them yourself. They're documented at the bottom for completeness.
 
 ### Why some are "Sensitive" and some are "Config"
 
@@ -129,9 +135,44 @@ node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
 
 ---
 
+## Optional variables (both have sensible defaults)
+
+### `SANITY_API_VERSION`
+**What it is**: The Sanity API version string the server-side client pins against. Format `YYYY-MM-DD`.
+
+**Where it's used**: `api/_lib/sanity.js` reads it. Falls back to `'2024-10-01'` if unset.
+
+**Why it exists**: Sanity's API is dated — the client sends this to opt into a specific schema snapshot. Pinning means Sanity won't unexpectedly change behaviour on you when they release a new version. Leaving the default is fine for OCC today; bump it only when you want to adopt newer Sanity features and have verified nothing breaks.
+
+**When to change**: rarely. Only when intentionally upgrading. No action needed for day-to-day use.
+
+---
+
+### `VITE_SANITY_API_VERSION`
+**What it is**: Same as `SANITY_API_VERSION`, for the public read client in the browser bundle.
+
+**Where it's used**: `src/lib/sanityClient.js` reads it. Falls back to `'2024-10-01'` if unset.
+
+**When to change**: same reasoning as `SANITY_API_VERSION` — bump both together when upgrading, keep in sync.
+
+---
+
+## Platform-set variables (don't configure these yourself)
+
+These are set automatically by the runtime; you never add them in Vercel or `.env.local`. Listed here only so a reader isn't confused when they see them referenced in code.
+
+| Name | Set by | Where it's read | Purpose |
+|---|---|---|---|
+| `NODE_ENV` | Node / Vite / Vercel | `api/_lib/session.js` | Combined with `VERCEL` to decide whether to mark the session cookie `Secure`. In Production this is `'production'`, locally under `vercel dev` it's `'development'`. |
+| `VERCEL` | Vercel | `api/_lib/session.js` | Truthy whenever the function is running on Vercel's infrastructure (any environment — Production or Preview). Combined with `NODE_ENV` as above. |
+
+Together these two make sure the session cookie gets the `Secure` flag whenever it's being served over HTTPS, without needing explicit configuration.
+
+---
+
 ## Setting up `.env.local` for local full-stack dev
 
-Create a file called `.env.local` in the project root (it's gitignored). Format is `KEY=VALUE` per line, one line per variable. Include all eight variables above. The file will look like:
+Create a file called `.env.local` in the project root (it's gitignored). Format is `KEY=VALUE` per line, one line per variable. Include the eight required variables (the two optional `_API_VERSION` ones can be omitted — they'll default to `2024-10-01`). The file will look like:
 
 ```
 SANITY_PROJECT_ID=…
