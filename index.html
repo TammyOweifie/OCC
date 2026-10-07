@@ -4,15 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- No <title> or per-page meta tags in index.html — the <Seo>
-         component in src/components/shared/Seo.jsx is the single source
-         for <title>, description, canonical, and Open Graph / Twitter
-         tags across all routes. Keeping defaults here would duplicate
-         what Helmet injects.
-         Known limitation: social crawlers that don't execute JS
-         (Facebook, LinkedIn, WhatsApp) will see no OG tags on
-         sub-pages. Pre-rendering is the proper fix — tracked as
-         follow-up work. -->
+    <!-- Launch countdown phase: static social preview for non-JS crawlers
+         (WhatsApp, Facebook, LinkedIn). During the countdown every URL
+         renders the LaunchingSoon page, so sharing any link resolves to
+         this same card. REMOVE THIS BLOCK after 16 October 2026 so Seo.jsx
+         (src/components/shared/Seo.jsx) becomes the single source for
+         <title> / description / OG tags across routes again. -->
+    <title>Launching 16 October 2026 — Obudu Conservation Centre</title>
+    <meta name="description" content="The new Obudu Conservation Centre website launches 16 October 2026. Protecting the wildlife and wild lands of the Obudu Plateau since 2002." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Obudu Conservation Centre" />
+    <meta property="og:title" content="Launching 16 October 2026 — Obudu Conservation Centre" />
+    <meta property="og:description" content="The new Obudu Conservation Centre website launches 16 October 2026. Protecting the wildlife and wild lands of the Obudu Plateau since 2002." />
+    <meta property="og:url" content="https://obuduconservationc.org/" />
+    <meta property="og:image" content="https://obuduconservationc.org/assets/og/default.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Launching 16 October 2026 — Obudu Conservation Centre" />
+    <meta name="twitter:description" content="The new Obudu Conservation Centre website launches 16 October 2026. Protecting the wildlife and wild lands of the Obudu Plateau since 2002." />
+    <meta name="twitter:image" content="https://obuduconservationc.org/assets/og/default.jpg" />
+
     <meta name="theme-color" content="#526829" />
 
     <!-- Favicon -->

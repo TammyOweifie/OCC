@@ -23,4 +23,11 @@ const blockApiInDev = {
 
 export default defineConfig({
   plugins: [react(), blockApiInDev],
+  define: {
+    // Flips preview-only launch-gate overrides (src/lib/launch.js) off
+    // in Vercel production builds, so ?preview_launch_at / ?preview_force
+    // are inert on the live site. Vite replaces this with a boolean
+    // literal at build time; dead code is stripped.
+    __LAUNCH_PREVIEW_MODE__: JSON.stringify(process.env.VERCEL_ENV !== 'production'),
+  },
 })

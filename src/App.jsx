@@ -11,6 +11,8 @@ import News from './pages/News.jsx'
 import Reports from './pages/Reports.jsx'
 import Gallery from './pages/Gallery.jsx'
 import FoundersStory from './pages/FoundersStory.jsx'
+import LaunchingSoon from './pages/LaunchingSoon.jsx'
+import { useLaunchState } from './lib/useLaunchState.js'
 
 // Lazy-load: public visitors never download the admin bundle.
 const AdminApp = lazy(() => import('./admin/AdminApp.jsx'))
@@ -28,14 +30,25 @@ function AdminLoading() {
 function App() {
   const { pathname } = useLocation()
 
-  // The admin surface is its own app — no public Navbar/Footer, its own auth,
-  // its own layout. Split it off so nothing about the public site changes.
+  // The admin surface bypasses the launch gate — OCC staff can log in
+  // and upload content during the countdown phase. Its own layout, no
+  // public Navbar/Footer.
   if (pathname.startsWith('/admin')) {
     return (
       <Suspense fallback={<AdminLoading />}>
         <AdminApp />
       </Suspense>
     )
+  }
+
+  return <PublicApp />
+}
+
+function PublicApp() {
+  const { state, diffMs } = useLaunchState()
+
+  if (state === 'countdown') {
+    return <LaunchingSoon diffMs={diffMs} />
   }
 
   return (
