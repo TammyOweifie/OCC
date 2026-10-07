@@ -7,13 +7,18 @@ import { getFounderStory } from '../data/founderStory.js'
 
 function Portrait({ portrait }) {
   if (portrait.src) {
+    const webp = portrait.src.replace(/\.(jpe?g|png)$/i, '.webp')
     return (
       <div className="bg-sand-200 border border-sand-300/60 aspect-[4/3] overflow-hidden">
-        <img
-          src={portrait.src}
-          alt={portrait.alt || ''}
-          className="w-full h-full object-cover object-center"
-        />
+        <picture>
+          <source srcSet={webp} type="image/webp" />
+          <img
+            src={portrait.src}
+            alt={portrait.alt || ''}
+            loading="lazy"
+            className="w-full h-full object-cover object-center"
+          />
+        </picture>
       </div>
     )
   }

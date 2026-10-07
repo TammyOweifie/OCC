@@ -53,11 +53,15 @@ function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             <ScrollReveal delay={0.2} className="lg:col-span-6">
               <div className="relative overflow-hidden bg-sand-200">
-                <img
-                  src="/assets/images/home/who-we-are.jpg"
-                  alt="Youth and Community in Obudu"
-                  className="w-full h-[520px] object-cover object-center filter grayscale-[15%] contrast-[1.03]"
-                />
+                <picture>
+                  <source srcSet="/assets/images/home/who-we-are.webp" type="image/webp" />
+                  <img
+                    src="/assets/images/home/who-we-are.jpg"
+                    alt="Youth and Community in Obudu"
+                    loading="lazy"
+                    className="w-full h-[520px] object-cover object-center filter grayscale-[15%] contrast-[1.03]"
+                  />
+                </picture>
               </div>
             </ScrollReveal>
 
@@ -121,20 +125,28 @@ function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-10">
             <ScrollReveal delay={0.2}>
               <div className="overflow-hidden bg-sand-200 border border-sand-200 shadow-sm">
-                <img
-                  src="/assets/images/home/community1.jpg"
-                  alt="Fostering Local Support for the Conservation of Preuss's Monkey"
-                  className="w-full h-80 sm:h-96 object-cover object-center filter grayscale-[10%]"
-                />
+                <picture>
+                  <source srcSet="/assets/images/home/community1.webp" type="image/webp" />
+                  <img
+                    src="/assets/images/home/community1.jpg"
+                    alt="Fostering Local Support for the Conservation of Preuss's Monkey"
+                    loading="lazy"
+                    className="w-full h-80 sm:h-96 object-cover object-center filter grayscale-[10%]"
+                  />
+                </picture>
               </div>
             </ScrollReveal>
             <ScrollReveal delay={0.3}>
               <div className="overflow-hidden bg-sand-200 border border-sand-200 shadow-sm">
-                <img
-                  src="/assets/images/home/community2.jpg"
-                  alt="Plateau Youth Environmental Education Walk"
-                  className="w-full h-80 sm:h-96 object-cover object-center filter grayscale-[10%]"
-                />
+                <picture>
+                  <source srcSet="/assets/images/home/community2.webp" type="image/webp" />
+                  <img
+                    src="/assets/images/home/community2.jpg"
+                    alt="Plateau Youth Environmental Education Walk"
+                    loading="lazy"
+                    className="w-full h-80 sm:h-96 object-cover object-center filter grayscale-[10%]"
+                  />
+                </picture>
               </div>
             </ScrollReveal>
           </div>

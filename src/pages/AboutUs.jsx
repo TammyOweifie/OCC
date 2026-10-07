@@ -44,11 +44,16 @@ function AboutUs() {
         className="w-full relative overflow-hidden bg-sand-900"
       >
         <div className="w-full h-[480px] lg:h-[540px] relative">
-          <img
-            src="/assets/images/home/bg-hero1.jpg"
-            alt="Rolling green hills and cloud-draped montane landscape of the Obudu Plateau"
-            className="w-full h-full object-cover object-center"
-          />
+          <picture>
+            <source srcSet="/assets/images/home/bg-hero1.webp" type="image/webp" />
+            <img
+              src="/assets/images/home/bg-hero1.jpg"
+              alt="Rolling green hills and cloud-draped montane landscape of the Obudu Plateau"
+              className="w-full h-full object-cover object-center"
+              fetchPriority="high"
+              decoding="sync"
+            />
+          </picture>
           <div className="absolute inset-0 bg-black/10 pointer-events-none" />
           <div className="absolute bottom-4 right-6 text-right text-[11px] uppercase tracking-widest text-sand-50/80 font-mono drop-shadow">
             Obudu Plateau, Nigeria · 6.6417° N, 9.3667° E
@@ -192,11 +197,15 @@ function AboutUs() {
             <ScrollReveal delay={0.2} className="lg:col-span-6">
               <figure className="relative m-0 bg-sand-50 border border-sand-300/60 p-2 shadow-sm">
                 <div className="aspect-[4/3] overflow-hidden bg-sand-200">
-                  <img
-                    src="/assets/images/home/bg-hero.jpg"
-                    alt="Water cascading down moss-covered rocks at the natural spring grotto on the Obudu Plateau"
-                    className="w-full h-full object-cover"
-                  />
+                  <picture>
+                    <source srcSet="/assets/images/home/bg-hero.webp" type="image/webp" />
+                    <img
+                      src="/assets/images/home/bg-hero.jpg"
+                      alt="Water cascading down moss-covered rocks at the natural spring grotto on the Obudu Plateau"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </picture>
                 </div>
                 <figcaption className="mt-2 text-earth-600 text-xs tracking-wider uppercase font-sans text-right py-1">
                   Aeroplane Field Forest &amp; Natural Spring Grotto, Obudu Plateau

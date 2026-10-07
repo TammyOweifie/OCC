@@ -39,11 +39,20 @@ function HeroCarousel({
             }`}
             aria-hidden={i !== current}
           >
-            <img
-              src={slide.src}
-              alt={slide.alt || ''}
-              className="w-full h-full object-cover object-center scale-105"
-            />
+            <picture>
+              <source
+                srcSet={slide.src.replace(/\.(jpe?g|png)$/i, '.webp')}
+                type="image/webp"
+              />
+              <img
+                src={slide.src}
+                alt={slide.alt || ''}
+                className="w-full h-full object-cover object-center scale-105"
+                loading={i === 0 ? 'eager' : 'lazy'}
+                decoding={i === 0 ? 'sync' : 'async'}
+                fetchPriority={i === 0 ? 'high' : 'low'}
+              />
+            </picture>
           </div>
         ))}
       </div>

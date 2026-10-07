@@ -7,6 +7,7 @@ function Card({
   imageAspect = 'aspect-[3/2]',
   imageClassName,
   imageWrapClassName = '',
+  imageLoading = 'lazy',
   href,
   to,
   className = '',
@@ -25,7 +26,7 @@ function Card({
     <>
       {image && (
         <div className={imageWrapClass}>
-          <img src={image} alt={imageAlt} className={imgClass} />
+          <img src={image} alt={imageAlt} className={imgClass} loading={imageLoading} />
         </div>
       )}
       {children && (
