@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Button from '../components/ui/Button.jsx'
 import SectionHeading from '../components/ui/SectionHeading.jsx'
 import ScrollReveal from '../components/shared/ScrollReveal.jsx'
+import Seo from '../components/shared/Seo.jsx'
 
 const BANK_CARD_ID = 'bank-transfer-card'
 
@@ -114,6 +115,10 @@ function ExpandableText({ firstParagraph, additionalParagraphs = [] }) {
 function Donate() {
   return (
     <>
+      <Seo
+        title="Donate"
+        description="Support the Obudu Conservation Centre's work protecting wildlife, training community patrol teams and sustaining environmental education across the Obudu region."
+      />
       {/* Hero & Introduction */}
       <section className="max-w-4xl mx-auto px-6 sm:px-8 pt-20 pb-16 text-left">
         <ScrollReveal>

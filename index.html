@@ -3,13 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Obudu Conservation Centre</title>
+
+    <!-- No <title> or per-page meta tags in index.html — the <Seo>
+         component in src/components/shared/Seo.jsx is the single source
+         for <title>, description, canonical, and Open Graph / Twitter
+         tags across all routes. Keeping defaults here would duplicate
+         what Helmet injects.
+         Known limitation: social crawlers that don't execute JS
+         (Facebook, LinkedIn, WhatsApp) will see no OG tags on
+         sub-pages. Pre-rendering is the proper fix — tracked as
+         follow-up work. -->
+    <meta name="theme-color" content="#526829" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/assets/logos/occ-logo.png" />
+    <link rel="apple-touch-icon" href="/assets/logos/occ-logo.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Organization structured data — helps Google show rich info for OCC -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "NGO",
+        "name": "Obudu Conservation Centre",
+        "alternateName": "OCC",
+        "url": "https://obuduconservationc.org",
+        "logo": "https://obuduconservationc.org/assets/logos/occ-logo.png",
+        "description": "Protecting the wildlife and wild lands of the Obudu Plateau and Cross River National Park, Nigeria.",
+        "foundingDate": "2002",
+        "founder": {
+          "@type": "Person",
+          "name": "Mrs Onari Duke"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressRegion": "Cross River State",
+          "addressCountry": "NG"
+        },
+        "sameAs": [
+          "https://www.facebook.com/obuduconservationcentre/",
+          "https://www.instagram.com/obuduconservationcentre/",
+          "https://www.youtube.com/@obuduconservationcentre7103",
+          "https://x.com/obuducc"
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

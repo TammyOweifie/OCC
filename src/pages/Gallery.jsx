@@ -6,6 +6,7 @@ import ScrollReveal from '../components/shared/ScrollReveal.jsx'
 import Lightbox from '../components/shared/Lightbox.jsx'
 import { getGalleryFromSanity } from '../data/getGalleryFromSanity.js'
 import { useSanityData } from '../lib/useSanityData.js'
+import Seo from '../components/shared/Seo.jsx'
 
 function Gallery() {
   const { data: images, loading } = useSanityData(getGalleryFromSanity)
@@ -18,6 +19,10 @@ function Gallery() {
 
   return (
     <>
+      <Seo
+        title="Gallery"
+        description="A visual record of life, wildlife and conservation work on the Obudu Plateau — landscapes, community, and the ecosystems the Centre protects."
+      />
       {/* Page Heading */}
       <section className="max-w-6xl mx-auto px-6 sm:px-12 pt-16 sm:pt-20 pb-12 sm:pb-16">
         <ScrollReveal>

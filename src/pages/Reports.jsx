@@ -4,6 +4,7 @@ import SectionHeading from '../components/ui/SectionHeading.jsx'
 import ScrollReveal from '../components/shared/ScrollReveal.jsx'
 import { getReportsFromSanity } from '../data/getReportsFromSanity.js'
 import { useSanityData } from '../lib/useSanityData.js'
+import Seo from '../components/shared/Seo.jsx'
 
 function DownloadLink({ href }) {
   return (
@@ -37,6 +38,10 @@ function Reports() {
 
   return (
     <>
+      <Seo
+        title="Reports"
+        description="Progress reports and conservation research from the Obudu Conservation Centre, including primate protection and field programmes."
+      />
       {/* Page Heading */}
       <section className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 pt-20 sm:pt-24 pb-12 sm:pb-16">
         <ScrollReveal>

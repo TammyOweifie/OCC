@@ -7,6 +7,7 @@ import Modal from '../components/shared/Modal.jsx'
 import ScrollReveal from '../components/shared/ScrollReveal.jsx'
 import { getNewsFromSanity } from '../data/getNewsFromSanity.js'
 import { useSanityData } from '../lib/useSanityData.js'
+import Seo from '../components/shared/Seo.jsx'
 
 function formatDate(iso) {
   return new Date(iso).toLocaleDateString('en-US', {
@@ -21,6 +22,10 @@ function News() {
 
   return (
     <>
+      <Seo
+        title="News"
+        description="Stories, updates and field notes from Obudu Conservation Centre's work on the Obudu Plateau."
+      />
       {/* Page Heading */}
       <section className="max-w-6xl mx-auto px-6 sm:px-12 pt-16 sm:pt-20 pb-12 sm:pb-16">
         <ScrollReveal>

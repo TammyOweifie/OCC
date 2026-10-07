@@ -5,6 +5,7 @@ import HeroCarousel from '../components/shared/HeroCarousel.jsx'
 import PartnerMarquee from '../components/shared/PartnerMarquee.jsx'
 import ScrollReveal from '../components/shared/ScrollReveal.jsx'
 import VideoEmbed from '../components/shared/VideoEmbed.jsx'
+import Seo from '../components/shared/Seo.jsx'
 import { partners } from '../data/partners.js'
 
 const heroSlides = [
@@ -19,6 +20,9 @@ const heroSlides = [
 function Home() {
   return (
     <>
+      <Seo
+        description="Obudu Conservation Centre protects the wildlife and wild lands of the Obudu Plateau and Cross River National Park. Supporting biodiversity research, community conservation and education in Nigeria since 2002."
+      />
       {/* Hero */}
       <section id="home">
         <HeroCarousel slides={heroSlides}>

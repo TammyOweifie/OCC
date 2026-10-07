@@ -2,6 +2,7 @@
 import Button from '../components/ui/Button.jsx'
 import SectionHeading from '../components/ui/SectionHeading.jsx'
 import ScrollReveal from '../components/shared/ScrollReveal.jsx'
+import Seo from '../components/shared/Seo.jsx'
 import { getFounderStory } from '../data/founderStory.js'
 
 function Portrait({ portrait }) {
@@ -68,6 +69,11 @@ function FoundersStory() {
 
   return (
     <>
+      <Seo
+        title="The Founder's Story"
+        description="Mrs Onari Duke founded the Obudu Conservation Educational Centre in January 2002, when conservation was not yet part of Nigeria's national conversation."
+        type="article"
+      />
       {/* Page Heading */}
       <section className="max-w-6xl mx-auto px-6 sm:px-12 pt-16 sm:pt-20 pb-10">
         <ScrollReveal>

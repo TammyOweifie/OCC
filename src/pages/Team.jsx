@@ -3,11 +3,16 @@ import Button from '../components/ui/Button.jsx'
 import Card from '../components/ui/Card.jsx'
 import SectionHeading from '../components/ui/SectionHeading.jsx'
 import ScrollReveal from '../components/shared/ScrollReveal.jsx'
+import Seo from '../components/shared/Seo.jsx'
 import { coreTeam, boardMembers } from '../data/team.js'
 
 function Team() {
   return (
     <>
+      <Seo
+        title="Team"
+        description="Meet the conservationists, researchers and community stewards behind the Obudu Conservation Centre's work on the Obudu Plateau."
+      />
       {/* Page Heading */}
       <section className="max-w-5xl mx-auto px-6 md:px-10 pt-16 pb-14 text-center">
         <ScrollReveal>
