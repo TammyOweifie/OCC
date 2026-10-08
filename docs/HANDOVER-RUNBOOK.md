@@ -116,6 +116,8 @@ Create OCC's Vercel project **alongside** the old one so the current preview URL
 | `VITE_SANITY_DATASET` | Config | `production` |
 | `SANITY_API_VERSION` | Sensitive | Optional — omit to accept default `2024-10-01` |
 | `VITE_SANITY_API_VERSION` | Config | Optional — omit to accept default `2024-10-01` |
+| `VITE_LAUNCH_AT` | Config | `2026-10-15T23:00:00Z` (00:00 WAT, Fri 16 Oct 2026). Lets the launch moment be edited later without a code change. |
+| `VITE_LAUNCH_MODE` | Config | `auto`. Flip to `live` to force the full site on, or `countdown` to force the countdown page on — the emergency override during launch night. |
 
 2.5 **(c)** OCC clicks **Deploy**. First build takes about 2 minutes.
 
