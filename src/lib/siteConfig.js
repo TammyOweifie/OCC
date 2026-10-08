@@ -21,7 +21,7 @@ export const siteConfig = {
   ogImage: '/assets/og/default.jpg',
 
   // Email + social
-  email: 'info@obuduconservation.org',
+  email: 'info@obuduconservationc.org',
   social: {
     facebook: 'https://www.facebook.com/obuduconservationcentre/',
     instagram: 'https://www.instagram.com/obuduconservationcentre/',
