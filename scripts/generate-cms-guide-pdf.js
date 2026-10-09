@@ -10,31 +10,43 @@
 import puppeteer from 'puppeteer'
 import { fileURLToPath } from 'node:url'
 import { dirname, resolve } from 'node:path'
-import { statSync } from 'node:fs'
+import { readFileSync, statSync } from 'node:fs'
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const HTML_SOURCE = resolve(ROOT, 'docs/cms-user-guide/index.html')
+const LOGO_PATH = resolve(ROOT, 'public/assets/logos/occ-logo.png')
 const PDF_OUT = resolve(ROOT, 'docs/CMS-USER-GUIDE.pdf')
 
 async function main() {
+  // Inline the logo as a data URL so the HTML has no filesystem-relative
+  // references — lets us use setContent() (sidesteps file:// sandbox
+  // issues some Chrome builds hit) and keeps everything self-contained.
+  const logoDataUrl = `data:image/png;base64,${readFileSync(LOGO_PATH).toString('base64')}`
+  const html = readFileSync(HTML_SOURCE, 'utf8').replace(
+    '../../public/assets/logos/occ-logo.png',
+    logoDataUrl
+  )
+
   // Prefer the system Chrome if present (macOS path); fall back to the
   // Chromium Puppeteer downloaded on first `npx puppeteer browsers install`.
   const SYSTEM_CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
   const useSystem = (() => {
     try { return statSync(SYSTEM_CHROME).isFile() } catch { return false }
   })()
+
   const browser = await puppeteer.launch({
     headless: true,
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
     ...(useSystem ? { executablePath: SYSTEM_CHROME } : {}),
   })
   try {
     const page = await browser.newPage()
-    await page.goto(`file://${HTML_SOURCE}`, { waitUntil: 'networkidle0' })
+    await page.setContent(html, { waitUntil: 'networkidle0' })
     await page.pdf({
       path: PDF_OUT,
       format: 'A4',
       printBackground: true,
-      preferCSSPageSize: true, // honours the @page rules in the HTML
+      preferCSSPageSize: true, // honours @page rules in the HTML
       margin: { top: '0', right: '0', bottom: '0', left: '0' },
     })
   } finally {
