@@ -71,6 +71,11 @@ const founderStory = {
     },
   ],
 
+  closingImage: {
+    src: '/assets/images/founder/mrs-duke-becheve-reserve.jpg',
+    alt: 'Mrs Onari Duke at the entrance to the Becheve Nature Reserve on the Obudu Plateau',
+  },
+
   closing:
     'What began as one woman’s conviction, at a time when few in Nigeria shared it, laid the groundwork for everything the Centre does today.',
 }

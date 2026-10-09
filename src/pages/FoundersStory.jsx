@@ -70,7 +70,7 @@ function StorySection({ section }) {
 
 function FoundersStory() {
   const story = getFounderStory()
-  const { meta, opening, sections, closing } = story
+  const { meta, opening, sections, closingImage, closing } = story
 
   return (
     <>
@@ -118,8 +118,26 @@ function FoundersStory() {
         </div>
       </section>
 
-      {/* Closing pull-quote */}
+      {/* Closing image + pull-quote */}
       <section className="max-w-[70ch] mx-auto px-6 pb-24 sm:pb-32">
+        {closingImage?.src && (
+          <ScrollReveal>
+            <figure className="bg-sand-200 border border-sand-300/60 aspect-[3/2] overflow-hidden mb-10 sm:mb-14">
+              <picture>
+                <source
+                  srcSet={closingImage.src.replace(/\.(jpe?g|png)$/i, '.webp')}
+                  type="image/webp"
+                />
+                <img
+                  src={closingImage.src}
+                  alt={closingImage.alt || ''}
+                  loading="lazy"
+                  className="w-full h-full object-cover object-center"
+                />
+              </picture>
+            </figure>
+          </ScrollReveal>
+        )}
         <ScrollReveal>
           <blockquote className="text-accent font-serif text-xl sm:text-2xl leading-relaxed text-center">
             {closing}
