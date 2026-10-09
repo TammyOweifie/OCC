@@ -1,0 +1,1032 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>CMS User Guide — Obudu Conservation Centre</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --sand-50: #FBF9F5;
+      --sand-100: #F5F2EB;
+      --sand-200: #ECE6D9;
+      --sand-300: #DDD4C1;
+      --sand-800: #3A352D;
+      --sand-900: #23201B;
+      --earth-600: #5C5446;
+      --earth-700: #464034;
+      --earth-800: #322E25;
+      --forest-700: #2D4A3E;
+      --forest-800: #20362D;
+      --forest-900: #16241E;
+      --accent: #526829;
+      --accent-dark: #3c4d1d;
+      --ink: #111311;
+      --danger: #b4322a;
+
+      --font-serif: "Playfair Display", Georgia, serif;
+      --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+      --font-display: "Cinzel", serif;
+      --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    }
+
+    @page {
+      size: A4;
+      margin: 20mm 18mm 22mm 18mm;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-sans);
+      font-size: 10.5pt;
+      line-height: 1.55;
+      color: var(--earth-700);
+      background: var(--sand-50);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-serif);
+      font-weight: 400;
+      color: var(--sand-900);
+      line-height: 1.2;
+      margin: 0 0 0.6em;
+    }
+
+    h1 { font-size: 28pt; letter-spacing: -0.01em; }
+    h2 { font-size: 20pt; margin-top: 0; letter-spacing: -0.005em; }
+    h3 { font-size: 14pt; margin-top: 1.6em; color: var(--forest-800); }
+    h4 { font-size: 11.5pt; font-family: var(--font-sans); font-weight: 600; color: var(--earth-800); margin-top: 1.2em; margin-bottom: 0.4em; letter-spacing: 0.01em; }
+
+    p { margin: 0 0 0.9em; }
+    strong { color: var(--sand-900); font-weight: 600; }
+    em { font-style: italic; }
+
+    a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
+
+    ul, ol { margin: 0 0 0.9em; padding-left: 1.3em; }
+    li { margin-bottom: 0.3em; }
+    li > p:last-child { margin-bottom: 0; }
+
+    code, .mono {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      background: var(--sand-100);
+      border: 1px solid var(--sand-200);
+      padding: 1px 5px;
+      border-radius: 2px;
+      color: var(--earth-800);
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 8.5pt;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+    }
+
+    .page-break { page-break-before: always; }
+    .avoid-break { page-break-inside: avoid; }
+
+    /* ---------- Cover ---------- */
+    .cover {
+      page-break-after: always;
+      height: 253mm; /* fills A4 inside margins */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .cover-top { display: flex; justify-content: space-between; align-items: flex-start; }
+    .cover-logo { height: 56px; width: auto; }
+    .cover-meta {
+      font-family: var(--font-mono);
+      font-size: 8.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--earth-600);
+      text-align: right;
+      line-height: 1.9;
+    }
+    .cover-centre {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 20mm;
+      padding-bottom: 20mm;
+    }
+    .cover-eyebrow {
+      font-family: var(--font-display);
+      font-size: 10pt;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20mm;
+    }
+    .cover-title {
+      font-family: var(--font-serif);
+      font-size: 42pt;
+      line-height: 1.08;
+      color: var(--sand-900);
+      max-width: 150mm;
+      margin-bottom: 12mm;
+      letter-spacing: -0.015em;
+    }
+    .cover-subtitle {
+      font-family: var(--font-sans);
+      font-weight: 300;
+      font-size: 13pt;
+      color: var(--earth-700);
+      max-width: 140mm;
+      line-height: 1.5;
+    }
+    .cover-rule {
+      height: 1px;
+      background: var(--sand-300);
+      margin: 24mm 0 8mm;
+    }
+    .cover-foot {
+      font-family: var(--font-mono);
+      font-size: 8.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--earth-600);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* ---------- Quick start box ---------- */
+    .quickstart {
+      background: var(--forest-800);
+      color: var(--sand-50);
+      padding: 10mm 11mm 8mm;
+      margin: 0 0 10mm;
+      page-break-inside: avoid;
+      border-radius: 1px;
+    }
+    .quickstart .eyebrow { color: var(--sand-200); }
+    .quickstart h2 {
+      color: var(--sand-50);
+      font-size: 18pt;
+      margin: 4mm 0 7mm;
+    }
+    .quickstart ol {
+      counter-reset: qs;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .quickstart ol li {
+      counter-increment: qs;
+      padding-left: 10mm;
+      position: relative;
+      margin-bottom: 3mm;
+      color: var(--sand-100);
+    }
+    .quickstart ol li::before {
+      content: counter(qs, decimal-leading-zero);
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-family: var(--font-mono);
+      font-size: 9pt;
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.1em;
+    }
+
+    /* ---------- TOC ---------- */
+    .toc {
+      border-top: 1px solid var(--sand-300);
+      padding-top: 8mm;
+    }
+    .toc ol {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      counter-reset: toc;
+    }
+    .toc li {
+      counter-increment: toc;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 3mm 0;
+      border-bottom: 1px dotted var(--sand-300);
+      font-size: 11pt;
+    }
+    .toc li::before {
+      content: counter(toc, decimal-leading-zero);
+      font-family: var(--font-mono);
+      font-size: 8.5pt;
+      color: var(--accent);
+      margin-right: 6mm;
+      min-width: 10mm;
+      letter-spacing: 0.1em;
+    }
+    .toc li span.title { flex: 1; color: var(--sand-900); font-weight: 500; }
+
+    /* ---------- Section header ---------- */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 10mm;
+      margin-bottom: 8mm;
+      padding-bottom: 4mm;
+      border-bottom: 1px solid var(--sand-300);
+    }
+    .section-number {
+      font-family: var(--font-mono);
+      font-size: 10pt;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+    }
+    .section-header h2 { margin: 0; }
+
+    /* ---------- Field table (news/report forms) ---------- */
+    .field-table {
+      border-top: 1px solid var(--sand-300);
+      margin: 4mm 0 6mm;
+    }
+    .field-row {
+      display: grid;
+      grid-template-columns: 48mm 1fr;
+      gap: 8mm;
+      padding: 4mm 0;
+      border-bottom: 1px solid var(--sand-200);
+      page-break-inside: avoid;
+    }
+    .field-row .name {
+      font-family: var(--font-mono);
+      font-size: 9pt;
+      color: var(--earth-800);
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+    .field-row .required {
+      display: inline-block;
+      font-size: 7pt;
+      background: var(--accent);
+      color: var(--sand-50);
+      padding: 1px 6px;
+      border-radius: 1px;
+      margin-left: 4px;
+      vertical-align: middle;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .field-row .optional {
+      display: inline-block;
+      font-size: 7pt;
+      background: var(--sand-200);
+      color: var(--earth-700);
+      padding: 1px 6px;
+      border-radius: 1px;
+      margin-left: 4px;
+      vertical-align: middle;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .field-row .desc { font-size: 10pt; }
+    .field-row .desc .example {
+      display: block;
+      margin-top: 2mm;
+      font-family: var(--font-mono);
+      font-size: 8.5pt;
+      color: var(--earth-600);
+      border-left: 2px solid var(--accent);
+      padding-left: 3mm;
+    }
+
+    /* ---------- Callouts ---------- */
+    .callout {
+      border-left: 3px solid var(--accent);
+      background: var(--sand-100);
+      padding: 5mm 7mm;
+      margin: 4mm 0 6mm;
+      font-size: 10pt;
+      page-break-inside: avoid;
+    }
+    .callout.warn {
+      border-left-color: var(--danger);
+      background: #fdf5f3;
+    }
+    .callout.warn strong { color: var(--danger); }
+    .callout .label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 8pt;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1mm;
+    }
+    .callout.warn .label { color: var(--danger); }
+
+    /* ---------- Screenshot placeholder ---------- */
+    .screenshot {
+      margin: 5mm 0 6mm;
+      border: 1px dashed var(--sand-300);
+      background: var(--sand-100);
+      padding: 15mm 10mm;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 8.5pt;
+      color: var(--earth-600);
+      letter-spacing: 0.08em;
+      page-break-inside: avoid;
+    }
+    .screenshot::before {
+      content: "SCREENSHOT · ";
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* ---------- Steps ---------- */
+    ol.steps {
+      counter-reset: step;
+      list-style: none;
+      padding: 0;
+      margin: 4mm 0 6mm;
+    }
+    ol.steps > li {
+      counter-increment: step;
+      padding: 0 0 4mm 12mm;
+      position: relative;
+      margin-bottom: 2mm;
+    }
+    ol.steps > li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 8mm;
+      height: 8mm;
+      line-height: 8mm;
+      text-align: center;
+      background: var(--forest-800);
+      color: var(--sand-50);
+      font-family: var(--font-mono);
+      font-size: 9pt;
+      font-weight: 500;
+      border-radius: 50%;
+    }
+
+    /* ---------- Standard table (rules, troubleshooting) ---------- */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 4mm 0 6mm;
+      font-size: 10pt;
+    }
+    thead th {
+      text-align: left;
+      border-bottom: 2px solid var(--sand-300);
+      padding: 3mm 4mm;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--earth-800);
+    }
+    tbody td {
+      padding: 3mm 4mm;
+      border-bottom: 1px solid var(--sand-200);
+      vertical-align: top;
+    }
+    tbody tr:nth-child(odd) td { background: var(--sand-100); }
+
+    /* ---------- Footer line ---------- */
+    .doc-footer {
+      border-top: 1px solid var(--sand-300);
+      padding-top: 5mm;
+      margin-top: 10mm;
+      font-family: var(--font-mono);
+      font-size: 8pt;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--earth-600);
+      text-align: center;
+    }
+
+    /* ---------- TODO section (removable) ---------- */
+    .todos {
+      background: #fff8e8;
+      border: 1px solid #ead9a0;
+      padding: 7mm 9mm;
+      margin: 10mm 0 4mm;
+      font-size: 10pt;
+      page-break-inside: avoid;
+    }
+    .todos h3 {
+      margin-top: 0;
+      color: #8a6400;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      font-size: 11pt;
+    }
+    .todos ol { padding-left: 1.1em; }
+    .todos li { margin-bottom: 2mm; }
+  </style>
+</head>
+<body>
+
+<!-- ================================================================ -->
+<!-- COVER PAGE                                                       -->
+<!-- ================================================================ -->
+<section class="cover">
+  <div class="cover-top">
+    <img class="cover-logo" src="../../public/assets/logos/occ-logo.png" alt="Obudu Conservation Centre" />
+    <div class="cover-meta">
+      Version 1.0<br />
+      October 2026<br />
+      For OCC staff
+    </div>
+  </div>
+
+  <div class="cover-centre">
+    <p class="cover-eyebrow">Content Management System</p>
+    <h1 class="cover-title">User Guide</h1>
+    <p class="cover-subtitle">
+      How to log in, add news stories and reports, upload photos, and keep the Obudu Conservation Centre website up to date — without needing a developer.
+    </p>
+  </div>
+
+  <div>
+    <div class="cover-rule"></div>
+    <div class="cover-foot">
+      <span>Obudu Conservation Centre</span>
+      <span>obuduconservationc.org</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- QUICK START + TABLE OF CONTENTS                                  -->
+<!-- ================================================================ -->
+<section>
+  <div class="quickstart">
+    <p class="eyebrow">Quick start</p>
+    <h2>The five tasks you'll do most often</h2>
+    <ol>
+      <li><strong>Log in</strong> — go to <code>obuduconservationc.org/admin</code>, enter email and password.</li>
+      <li><strong>Post a news story</strong> — Admin → News → New post → fill the form → Create post.</li>
+      <li><strong>Add a report with a PDF</strong> — Admin → Reports → New report → attach the PDF → Create report.</li>
+      <li><strong>Add photos to the gallery</strong> — Admin → Gallery → Upload → drag photos → Upload all.</li>
+      <li><strong>Edit or delete</strong> — Admin → the list of the item type → <em>Edit</em> or <em>Delete</em> next to the row.</li>
+    </ol>
+  </div>
+
+  <div class="toc">
+    <p class="eyebrow">Contents</p>
+    <ol>
+      <li><span class="title">What the CMS is for</span></li>
+      <li><span class="title">Logging in</span></li>
+      <li><span class="title">Adding a News post</span></li>
+      <li><span class="title">Adding a Report</span></li>
+      <li><span class="title">Adding Gallery photos</span></li>
+      <li><span class="title">Editing an item</span></li>
+      <li><span class="title">Deleting an item</span></li>
+      <li><span class="title">When changes go live</span></li>
+      <li><span class="title">File and image rules</span></li>
+      <li><span class="title">Good practice</span></li>
+      <li><span class="title">Security</span></li>
+      <li><span class="title">Troubleshooting</span></li>
+      <li><span class="title">Getting help</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 01 WHAT THE CMS IS FOR                                           -->
+<!-- ================================================================ -->
+<section class="page-break">
+  <div class="section-header">
+    <span class="section-number">01</span>
+    <h2>What the CMS is for</h2>
+  </div>
+
+  <p>The CMS (short for <em>Content Management System</em>) is the hidden back-of-house part of the OCC website that lets staff add and change content without touching code. You open it in a browser, sign in, and work in simple forms. When you save, the changes appear on the public site straight away.</p>
+
+  <h4>What you can manage yourself</h4>
+  <ul>
+    <li><strong>News posts</strong> — stories, updates and announcements that appear on the News page.</li>
+    <li><strong>Reports</strong> — longer pieces of writing, usually with a downloadable PDF attached, that appear on the Reports page.</li>
+    <li><strong>Gallery photos</strong> — individual photographs that appear on the Gallery page.</li>
+  </ul>
+
+  <h4>What you can't change yourself (contact the developer)</h4>
+  <ul>
+    <li>The <strong>page copy</strong> on Home, About, Donate, Founder's Story and Team pages</li>
+    <li>The <strong>team member list</strong> (names, roles, photos, biographies)</li>
+    <li><strong>Hero images and background photos</strong> on pages (the big photos at the top of each page)</li>
+    <li><strong>Navigation menu items</strong>, the footer, and the OCC logo</li>
+    <li><strong>Site settings</strong> like the donation account details</li>
+  </ul>
+
+  <p>These are set in the website's code and need the developer to change them. If something on one of those pages is wrong or needs updating, use the contact information in Section 13.</p>
+</section>
+
+<!-- ================================================================ -->
+<!-- 02 LOGGING IN                                                    -->
+<!-- ================================================================ -->
+<section class="page-break">
+  <div class="section-header">
+    <span class="section-number">02</span>
+    <h2>Logging in</h2>
+  </div>
+
+  <ol class="steps">
+    <li>Open your web browser and go to <code>https://obuduconservationc.org/admin</code></li>
+    <li>Enter the <strong>email address</strong> you were given.</li>
+    <li>Enter your <strong>password</strong>.</li>
+    <li>Click <strong>Sign in</strong>. You will be taken to the Dashboard.</li>
+  </ol>
+
+  <div class="screenshot">The login screen (email + password + Sign in button)</div>
+
+  <h4>If you forget your password</h4>
+  <p>There is no self-service "forgot password" link. Contact the developer (see Section 13) and ask for a password reset. The developer will set a new one and tell you what it is on a secure channel; change it on your side afterwards.</p>
+
+  <h4>If the login won't accept your credentials</h4>
+  <p>Double-check that caps lock is off, that the email is spelled correctly, and that you are copying the password without extra spaces. The system does <em>not</em> lock your account after failed attempts, so you can keep trying. If you still cannot get in, contact the developer.</p>
+
+  <h4>Signing out</h4>
+  <p>Use the <strong>Sign out</strong> link in the top-right of any admin screen. On a shared or public computer, always sign out when you are done.</p>
+</section>
+
+<!-- ================================================================ -->
+<!-- 03 ADDING A NEWS POST                                            -->
+<!-- ================================================================ -->
+<section class="page-break">
+  <div class="section-header">
+    <span class="section-number">03</span>
+    <h2>Adding a News post</h2>
+  </div>
+
+  <p>News posts appear on the public <strong>News</strong> page at <code>obuduconservationc.org/news</code>.</p>
+
+  <ol class="steps">
+    <li>From the Dashboard, click the <strong>News</strong> card.</li>
+    <li>Click <strong>New post</strong> (top right of the News list).</li>
+    <li>Fill in the form (every field explained below).</li>
+    <li>Click <strong>Create post</strong>.</li>
+  </ol>
+
+  <div class="screenshot">The New Post form filled in with example content</div>
+
+  <h3>Fields on the News form</h3>
+  <div class="field-table">
+    <div class="field-row">
+      <div class="name">Title <span class="required">Required</span></div>
+      <div class="desc">
+        The headline of the story. Short and specific is better than long and clever.
+        <span class="example">e.g. "Primate monitoring programme — Q3 2026 update"</span>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="name">Slug</div>
+      <div class="desc">
+        A short, URL-safe version of the title that becomes part of the web address. It is filled in for you automatically from the title; you normally don't need to touch it. Only edit it if you want a shorter or different URL.
+        <span class="example">e.g. "primate-monitoring-q3-2026-update"</span>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="name">Date published</div>
+      <div class="desc">
+        Pick a date from the calendar. This is the date shown next to the post on the News page. Defaults to today if you leave it blank.
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="name">Thumbnail</div>
+      <div class="desc">
+        A cover image for the post, shown on the News page card and at the top of the article when a visitor opens it. Click <em>Choose file</em> and pick a photo from your computer. See <strong>Section 9</strong> for file-size and format rules.
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="name">Alt text</div>
+      <div class="desc">
+        A one-sentence description of the thumbnail photo. Used by screen readers for people who cannot see the image, and by search engines. Describe what is in the picture.
+        <span class="example">e.g. "Volunteer tagging a Preuss's Monkey at the Obudu research camp."</span>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="name">Excerpt</div>
+      <div class="desc">
+        A short summary — two or three sentences — shown on the News page card. Think of it as the invitation to read the full post. Keep it under 300 characters.
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="name">Body</div>
+      <div class="desc">
+        The full content of the story. Write in plain prose. Separate paragraphs with a blank line (press Enter twice). There is no formatting toolbar — if you need bold, italics or links, flag it with the developer for a future upgrade.
+      </div>
+    </div>
+  </div>
+
+  <p>After clicking <strong>Create post</strong> you'll return to the News list and the new post appears at the top. Open the public News page in another browser tab to see it live.</p>
+</section>
+
+<!-- ================================================================ -->
+<!-- 04 ADDING A REPORT                                               -->
+<!-- ================================================================ -->
+<section class="page-break">
+  <div class="section-header">
+    <span class="section-number">04</span>
+    <h2>Adding a Report</h2>
+  </div>
+
+  <p>Reports appear on the public <strong>Reports</strong> page at <code>obuduconservationc.org/reports</code>. A report usually has a title, a short write-up, a cover image, and a downloadable file (typically a PDF).</p>
+
+  <ol class="steps">
+    <li>From the Dashboard, click the <strong>Reports</strong> card.</li>
+    <li>Click <strong>New report</strong>.</li>
+    <li>Fill in the form (fields below).</li>
+    <li>Click <strong>Create report</strong>.</li>
+  </ol>
+
+  <div class="screenshot">The Report form with cover image and PDF attached</div>
+
+  <h3>Fields on the Report form</h3>
+  <div class="field-table">
+    <div class="field-row">
+      <div class="name">Title <span class="required">Required</span></div>
+      <div class="desc">
+        The title of the report.
+        <span class="example">e.g. "Annual Biodiversity Monitoring Report 2026"</span>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="name">Date</div>
+      <div class="desc">The publication date of the report.</div>
+    </div>
+    <div class="field-row">
+      <div class="name">Cover image</div>
+      <div class="desc">
+        A photograph shown next to the write-up on the Reports page. Same file rules as news thumbnails (Section 9).
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="name">Alt text</div>
+      <div class="desc">A one-sentence description of the cover image.</div>
+    </div>
+    <div class="field-row">
+      <div class="name">Description</div>
+      <div class="desc">
+        The body text shown on the Reports page. Think of this as the summary a visitor reads before deciding to download the full report. Keep it to a paragraph or two.
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="name">Downloadable file <span class="optional">Optional</span></div>
+      <div class="desc">
+        Attach the full report as a PDF (Word documents also accepted). Click <em>Choose file</em> and pick it from your computer. Maximum file size is <strong>3 MB</strong> — see Section 9 for how to compress larger files.
+      </div>
+    </div>
+  </div>
+
+  <h4>Shrinking a large PDF</h4>
+  <p>If your PDF is over 3 MB, use a free online compressor such as <a href="https://smallpdf.com/compress-pdf">Smallpdf</a> or <a href="https://www.ilovepdf.com/compress_pdf">iLovePDF</a> before uploading. Choose a "medium" or "web" quality level; a 10 MB report will usually come down to 1–2 MB without visible loss.</p>
+</section>
+
+<!-- ================================================================ -->
+<!-- 05 ADDING GALLERY PHOTOS                                         -->
+<!-- ================================================================ -->
+<section class="page-break">
+  <div class="section-header">
+    <span class="section-number">05</span>
+    <h2>Adding Gallery photos</h2>
+  </div>
+
+  <p>The Gallery page at <code>obuduconservationc.org/gallery</code> displays photographs OCC wants to share with the public. The admin lets you upload many photos at once.</p>
+
+  <ol class="steps">
+    <li>From the Dashboard, click the <strong>Gallery</strong> card.</li>
+    <li>Click <strong>Upload</strong>.</li>
+    <li>Drag photos from your computer onto the drop area, or click <strong>Choose files</strong> and select them. You can pick as many as you like in one go.</li>
+    <li>For each photo in the queue, write a short <strong>alt text</strong> (one sentence describing what is in the picture).</li>
+    <li>Click <strong>Upload all</strong>. The system uploads them one by one and marks each as <em>Done</em> or <em>Failed</em>.</li>
+    <li>When finished, click <strong>Back to gallery</strong>.</li>
+  </ol>
+
+  <div class="screenshot">The Gallery upload queue with photos ready to send</div>
+
+  <div class="callout">
+    <span class="label">Tip</span>
+    <strong>Nothing is uploaded until you click <em>Upload all</em>.</strong> Up to that point you can remove any file from the queue with the <em>Remove</em> button, add more photos, or edit the alt text freely.
+  </div>
+
+  <h4>If a photo fails to upload</h4>
+  <p>The most common reason is file size (over 3 MB). The failed row stays in the queue with a red error message explaining why. Remove it, shrink the file (see Section 9), and add it again.</p>
+</section>
+
+<!-- ================================================================ -->
+<!-- 06 EDITING AN ITEM                                               -->
+<!-- ================================================================ -->
+<section class="page-break">
+  <div class="section-header">
+    <span class="section-number">06</span>
+    <h2>Editing an existing item</h2>
+  </div>
+
+  <ol class="steps">
+    <li>From the Dashboard, click the card for the type of item (News, Reports, or Gallery).</li>
+    <li>Find the item in the list and click <strong>Edit</strong>.</li>
+    <li>Change the fields you want to update.</li>
+    <li>Click <strong>Save changes</strong>.</li>
+  </ol>
+
+  <div class="callout">
+    <span class="label">Images</span>
+    If you don't pick a new image or file, the existing one is kept. You only need to re-upload if you actually want to replace it.
+  </div>
+
+  <p>Changes appear on the public site immediately. If a visitor already has the page open in their browser, they may need to refresh (Section 12 covers this).</p>
+</section>
+
+<!-- ================================================================ -->
+<!-- 07 DELETING AN ITEM                                              -->
+<!-- ================================================================ -->
+<section class="page-break">
+  <div class="section-header">
+    <span class="section-number">07</span>
+    <h2>Deleting an item</h2>
+  </div>
+
+  <ol class="steps">
+    <li>From the Dashboard, click the card for the type of item (News, Reports, or Gallery).</li>
+    <li>Find the item in the list and click <strong>Delete</strong>.</li>
+    <li>Confirm when the browser asks.</li>
+  </ol>
+
+  <div class="callout warn">
+    <span class="label">Warning</span>
+    <strong>Deletion cannot be undone from the admin.</strong> The item disappears from the public site immediately. Recent items may still be recoverable from the monthly backup for a short window — if you delete something by mistake, <em>contact the developer straight away</em> (see Section 13). The faster you report it, the better the chance of recovery.
+  </div>
+
+  <p>If you want to <em>temporarily</em> hide an item instead of deleting it, don't delete — ask the developer about adding a draft/hidden state (a planned upgrade, not currently in the admin).</p>
+</section>
+
+<!-- ================================================================ -->
+<!-- 08 WHEN CHANGES GO LIVE                                          -->
+<!-- ================================================================ -->
+<section class="page-break">
+  <div class="section-header">
+    <span class="section-number">08</span>
+    <h2>When changes go live</h2>
+  </div>
+
+  <p>The CMS does <strong>not</strong> have a separate "draft" and "published" state. Whatever you save is instantly live on the public website. There is no approval step and no scheduled publishing.</p>
+
+  <p>Visitors see your changes on their <strong>next page load</strong>. There is no cache that holds the old version for several minutes.</p>
+
+  <p>If a visitor has the page already open in their browser from before you saved, they'll still see the old version until they refresh. This is browser behaviour, not the CMS. See Section 12 for the keyboard shortcut.</p>
+
+  <div class="callout">
+    <span class="label">Rule of thumb</span>
+    Treat "Save changes" and "Create post" the same way you'd treat sending a public tweet: once you click, it's visible to anyone in the world.
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 09 FILE AND IMAGE RULES                                          -->
+<!-- ================================================================ -->
+<section class="page-break">
+  <div class="section-header">
+    <span class="section-number">09</span>
+    <h2>File and image rules</h2>
+  </div>
+
+  <h4>Maximum file size</h4>
+  <p><strong>3 MB per upload</strong>, hard limit. Files bigger than this are rejected with an error message naming the file and its size.</p>
+
+  <h4>Images</h4>
+  <table>
+    <thead>
+      <tr><th>Format</th><th>Behaviour</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>JPEG, PNG, WebP</td><td>Automatically shrunk in your browser to 2000 pixels on the longest side and re-saved as a smaller JPEG before being uploaded. You can upload originals straight from a camera; the system handles the shrinking.</td></tr>
+      <tr><td>HEIC (iPhone photos)</td><td>Not auto-shrunk. The raw file must already be under 3 MB. Easiest fix: on your iPhone, export or send the photo as "JPEG" or "Most Compatible" before uploading.</td></tr>
+      <tr><td>GIF, SVG</td><td>Not auto-shrunk. Must already be under 3 MB.</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Report attachments</h4>
+  <table>
+    <thead>
+      <tr><th>Format</th><th>Behaviour</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>PDF, DOC, DOCX</td><td>Not auto-shrunk. Must be under 3 MB. For bigger PDFs, use <a href="https://smallpdf.com/compress-pdf">Smallpdf</a> or <a href="https://www.ilovepdf.com/compress_pdf">iLovePDF</a> first.</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Recommended image dimensions</h4>
+  <ul>
+    <li><strong>Minimum</strong>: 1200 pixels wide, so the photo looks crisp on larger screens.</li>
+    <li><strong>Maximum useful size</strong>: anything bigger than 2000 pixels is automatically shrunk.</li>
+    <li><strong>Aspect ratio</strong>: landscape (wider than tall) works best for thumbnails and cover images, roughly 3:2 or 4:3.</li>
+  </ul>
+
+  <h4>Filenames and alt text</h4>
+  <ul>
+    <li>Give files human-readable names: <code>primate-rescue-july-2026.jpg</code>, not <code>IMG_8734.jpg</code>.</li>
+    <li>Alt text should describe what's actually in the photo. "A ranger and a child planting a seedling" is useful. "Photo 1" is not.</li>
+  </ul>
+</section>
+
+<!-- ================================================================ -->
+<!-- 10 GOOD PRACTICE                                                 -->
+<!-- ================================================================ -->
+<section class="page-break">
+  <div class="section-header">
+    <span class="section-number">10</span>
+    <h2>Good practice</h2>
+  </div>
+
+  <h4>Write for the reader</h4>
+  <ul>
+    <li><strong>Specific titles beat clever ones.</strong> "Primate monitoring programme — Q3 2026 update" tells someone exactly what they'll read; "An update" tells them nothing.</li>
+    <li><strong>Short excerpts</strong> that answer "why should I click?" work better than a repeated title.</li>
+    <li><strong>Dates in full.</strong> Pick the real publication date so visitors can see what's recent.</li>
+  </ul>
+
+  <h4>Check your work</h4>
+  <ul>
+    <li>Open the public page (<code>/news</code>, <code>/reports</code> or <code>/gallery</code>) in a new tab after saving.</li>
+    <li>Refresh. Confirm the title, image, and excerpt read correctly.</li>
+    <li>Click into the full post or report; make sure the body text reads well and the PDF (if any) downloads.</li>
+  </ul>
+
+  <h4>Protect sensitive information</h4>
+  <div class="callout warn">
+    <span class="label">Do not publish without approval</span>
+    <ul>
+      <li>Unpublished research data or draft findings</li>
+      <li>Precise GPS locations of endangered species or active research sites</li>
+      <li>Confidential partner or funder information</li>
+      <li>Personal data (names, phone numbers, addresses) of individuals who haven't consented to be named</li>
+      <li>Images of children where parental consent hasn't been obtained</li>
+    </ul>
+    If in doubt, don't publish — ask OCC's management first.
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 11 SECURITY                                                      -->
+<!-- ================================================================ -->
+<section class="page-break">
+  <div class="section-header">
+    <span class="section-number">11</span>
+    <h2>Security</h2>
+  </div>
+
+  <h4>Protect your login</h4>
+  <ul>
+    <li><strong>Never share your email and password</strong> with anyone — not even a colleague, "just this once". If a colleague needs access, ask the developer to create a separate login for them.</li>
+    <li><strong>Use a strong password.</strong> A password manager (such as 1Password or Bitwarden, both free for personal use) generates and remembers them for you.</li>
+    <li><strong>Change it on a schedule.</strong> Every 6–12 months is a sensible cadence. Ask the developer to generate a new one.</li>
+  </ul>
+
+  <h4>Two-step sign-in</h4>
+  <p>The admin login does <em>not</em> currently support two-step verification (also called 2FA or MFA). This is a planned upgrade. In the meantime, a strong unique password matters more than usual — do not reuse the OCC admin password anywhere else.</p>
+
+  <h4>On shared or public computers</h4>
+  <ul>
+    <li>Always click <strong>Sign out</strong> before closing the browser or leaving the computer.</li>
+    <li>Do not tick "remember me" boxes if the browser offers them.</li>
+    <li>Avoid using the admin on public Wi-Fi without a secure connection.</li>
+  </ul>
+
+  <h4>If you suspect someone else has accessed the account</h4>
+  <div class="callout warn">
+    <span class="label">Act immediately</span>
+    <ol>
+      <li><strong>Tell the developer and OCC management straight away.</strong></li>
+      <li>The developer will reset the password and sign out all active sessions.</li>
+      <li>Review recent News, Reports, and Gallery items for anything you don't recognise.</li>
+    </ol>
+    The faster the password is reset, the less damage anyone can do.
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 12 TROUBLESHOOTING                                               -->
+<!-- ================================================================ -->
+<section class="page-break">
+  <div class="section-header">
+    <span class="section-number">12</span>
+    <h2>Troubleshooting</h2>
+  </div>
+
+  <p>Most problems have simple fixes. Try the suggested step first; if it doesn't work, contact the developer with the exact wording of any error message you saw.</p>
+
+  <table>
+    <thead>
+      <tr><th>If this happens…</th><th>Try this</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Login won't accept your email and password</td>
+        <td>Check caps lock, copy the password without extra spaces, and make sure the email matches what you were given exactly. If still blocked, contact the developer for a reset.</td>
+      </tr>
+      <tr>
+        <td>Upload rejected — "file too large"</td>
+        <td>The file is over 3 MB. For photos, export at smaller dimensions or lower quality. For PDFs, shrink with Smallpdf or iLovePDF first. See Section 9.</td>
+      </tr>
+      <tr>
+        <td>Your changes aren't showing on the public page</td>
+        <td>Hard-refresh the public page in your browser. On Mac: <strong>Cmd + Shift + R</strong>. On Windows / Linux: <strong>Ctrl + Shift + R</strong>. If still absent after a minute, log into the admin and confirm the change was really saved.</td>
+      </tr>
+      <tr>
+        <td>You deleted the wrong thing</td>
+        <td>Contact the developer immediately. Recent items may be recoverable from the monthly backup, but speed matters.</td>
+      </tr>
+      <tr>
+        <td>An error message appears when you save</td>
+        <td>Write down the exact wording and send it to the developer. Do not re-submit the form repeatedly — if the first save actually succeeded despite the error, re-submitting creates duplicates.</td>
+      </tr>
+      <tr>
+        <td>The admin page itself won't load</td>
+        <td>Try a different browser (Chrome, Safari, Edge). If still broken, check that <code>obuduconservationc.org</code> loads at all. If the main site also fails, contact the developer — it's a hosting issue, not a CMS one.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ================================================================ -->
+<!-- 13 GETTING HELP                                                  -->
+<!-- ================================================================ -->
+<section class="page-break">
+  <div class="section-header">
+    <span class="section-number">13</span>
+    <h2>Getting help</h2>
+  </div>
+
+  <h4>Warranty period</h4>
+  <p>Support from the developer is included for <strong>three months after public launch</strong>: from <strong>16 October 2026</strong> to <strong>16 January 2027</strong>.</p>
+
+  <h4>Contact</h4>
+  <p>
+    Tammy Oweifie<br />
+    <strong>[SUPPORT EMAIL]</strong>
+  </p>
+
+  <h4>Response times</h4>
+  <table>
+    <thead>
+      <tr><th>Issue type</th><th>First response</th><th>Resolution target</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Normal issue (something odd, needs a question answered)</td><td>2 business days</td><td>Case by case</td></tr>
+      <tr><td>Critical issue (site down, CMS unusable, data loss)</td><td>Same business day</td><td>3 business days</td></tr>
+    </tbody>
+  </table>
+
+  <h4>What's covered</h4>
+  <ul>
+    <li><strong>Bug fixes</strong> — things that worked and have stopped working</li>
+    <li><strong>Clarifying questions</strong> about how to use the CMS</li>
+    <li><strong>Account recovery</strong> — password reset, lockout</li>
+  </ul>
+
+  <h4>What's NOT covered</h4>
+  <ul>
+    <li><strong>Content updates</strong> — writing or editing posts, reports, or captions. That's your work.</li>
+    <li><strong>New features</strong> — adding fields, pages, functionality. Billable separately.</li>
+    <li><strong>Training beyond this guide.</strong></li>
+  </ul>
+
+  <h4>After the warranty period</h4>
+  <p>After 16 January 2027 the developer can continue to provide support, bug fixes and new feature work as a separate paid engagement. Contact Tammy to discuss ongoing arrangements.</p>
+
+  <div class="doc-footer">
+    Obudu Conservation Centre · CMS User Guide v1.0 · October 2026
+  </div>
+
+  <div class="todos">
+    <h3>TODOs for Tammy before sharing with OCC</h3>
+    <ol>
+      <li><strong>[SUPPORT EMAIL]</strong> in Section 13 — fill in the address you want OCC to reach you at during warranty.</li>
+      <li><strong>Screenshot placeholders</strong> — six marked with "SCREENSHOT · " dashed boxes. Capture the real admin screens and embed them (or send to me and I'll swap them in).</li>
+      <li><strong>Confirm delete UX</strong> — I described a browser-prompt confirmation. Verify this matches the actual admin behaviour; adjust Section 7's wording if different.</li>
+      <li><strong>Gallery scope</strong> — I included Gallery. If OCC only wants News + Reports documented, remove Section 05 and references.</li>
+      <li><strong>Draft / preview state</strong> — currently none; documented as "planned upgrade" in Section 7. Confirm this framing is OK or soften it.</li>
+      <li><strong>Two-step sign-in</strong> — flagged as "planned upgrade" in Section 11. Confirm wording.</li>
+      <li><strong>Account lockout</strong> — code has no lockout; Section 2 mentions this explicitly. Confirm you're OK saying so publicly in a user guide.</li>
+    </ol>
+    <p style="margin-bottom:0;margin-top:3mm;font-size:9pt;color:var(--earth-700);"><em>Remove this box (and the HTML comment surrounding it in <code>docs/cms-user-guide/index.html</code>) before sharing the final PDF with OCC.</em></p>
+  </div>
+</section>
+
+</body>
+</html>
