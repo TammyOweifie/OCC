@@ -18,14 +18,23 @@ const LOGO_PATH = resolve(ROOT, 'public/assets/logos/occ-logo.png')
 const PDF_OUT = resolve(ROOT, 'docs/CMS-USER-GUIDE.pdf')
 
 async function main() {
-  // Inline the logo as a data URL so the HTML has no filesystem-relative
-  // references — lets us use setContent() (sidesteps file:// sandbox
-  // issues some Chrome builds hit) and keeps everything self-contained.
-  const logoDataUrl = `data:image/png;base64,${readFileSync(LOGO_PATH).toString('base64')}`
-  const html = readFileSync(HTML_SOURCE, 'utf8').replace(
+  // Inline the logo and every screenshot as data URLs so the HTML has no
+  // filesystem-relative references — lets us use setContent() (sidesteps
+  // file:// sandbox issues some Chrome builds hit) and keeps everything
+  // self-contained for later portability.
+  const toDataUrl = (p, mime = 'image/png') =>
+    `data:${mime};base64,${readFileSync(p).toString('base64')}`
+
+  let html = readFileSync(HTML_SOURCE, 'utf8').replace(
     '../../public/assets/logos/occ-logo.png',
-    logoDataUrl
+    toDataUrl(LOGO_PATH)
   )
+
+  // Inline every <img src="screenshots/*.png" ...> reference.
+  html = html.replace(/src="screenshots\/([^"]+)"/g, (_m, filename) => {
+    const abs = resolve(ROOT, 'docs/cms-user-guide/screenshots', filename)
+    return `src="${toDataUrl(abs)}"`
+  })
 
   // Prefer the system Chrome if present (macOS path); fall back to the
   // Chromium Puppeteer downloaded on first `npx puppeteer browsers install`.

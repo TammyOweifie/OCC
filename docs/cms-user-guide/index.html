@@ -33,7 +33,7 @@
 
     @page {
       size: A4;
-      margin: 20mm 18mm 22mm 18mm;
+      margin: 22mm 20mm 24mm 20mm;
     }
 
     * { box-sizing: border-box; }
@@ -43,7 +43,7 @@
       padding: 0;
       font-family: var(--font-sans);
       font-size: 10.5pt;
-      line-height: 1.55;
+      line-height: 1.65;
       color: var(--earth-700);
       background: var(--sand-50);
       -webkit-font-smoothing: antialiased;
@@ -53,24 +53,42 @@
       font-family: var(--font-serif);
       font-weight: 400;
       color: var(--sand-900);
-      line-height: 1.2;
-      margin: 0 0 0.6em;
+      line-height: 1.22;
+      margin: 0 0 0.7em;
+      page-break-after: avoid;
     }
 
     h1 { font-size: 28pt; letter-spacing: -0.01em; }
     h2 { font-size: 20pt; margin-top: 0; letter-spacing: -0.005em; }
-    h3 { font-size: 14pt; margin-top: 1.6em; color: var(--forest-800); }
-    h4 { font-size: 11.5pt; font-family: var(--font-sans); font-weight: 600; color: var(--earth-800); margin-top: 1.2em; margin-bottom: 0.4em; letter-spacing: 0.01em; }
+    h3 {
+      font-size: 14pt;
+      margin-top: 2em;
+      margin-bottom: 0.9em;
+      color: var(--forest-800);
+    }
+    h4 {
+      font-size: 11pt;
+      font-family: var(--font-sans);
+      font-weight: 600;
+      color: var(--earth-800);
+      margin-top: 1.6em;
+      margin-bottom: 0.6em;
+      letter-spacing: 0.01em;
+    }
+    h4:first-child, h3 + h4 { margin-top: 0.8em; }
 
-    p { margin: 0 0 0.9em; }
+    p { margin: 0 0 1em; }
     strong { color: var(--sand-900); font-weight: 600; }
     em { font-style: italic; }
 
     a { color: var(--accent); text-decoration: underline; text-underline-offset: 2px; }
 
-    ul, ol { margin: 0 0 0.9em; padding-left: 1.3em; }
-    li { margin-bottom: 0.3em; }
+    ul, ol { margin: 0.3em 0 1.1em; padding-left: 1.4em; }
+    li { margin-bottom: 0.45em; }
+    li:last-child { margin-bottom: 0; }
+    li > p { margin-bottom: 0.35em; }
     li > p:last-child { margin-bottom: 0; }
+    li > ul, li > ol { margin-top: 0.3em; margin-bottom: 0.3em; }
 
     code, .mono {
       font-family: var(--font-mono);
@@ -237,10 +255,11 @@
     .section-header {
       display: flex;
       align-items: baseline;
-      gap: 10mm;
-      margin-bottom: 8mm;
-      padding-bottom: 4mm;
+      gap: 12mm;
+      margin-bottom: 11mm;
+      padding-bottom: 5mm;
       border-bottom: 1px solid var(--sand-300);
+      page-break-after: avoid;
     }
     .section-number {
       font-family: var(--font-mono);
@@ -254,13 +273,13 @@
     /* ---------- Field table (news/report forms) ---------- */
     .field-table {
       border-top: 1px solid var(--sand-300);
-      margin: 4mm 0 6mm;
+      margin: 6mm 0 10mm;
     }
     .field-row {
       display: grid;
-      grid-template-columns: 48mm 1fr;
-      gap: 8mm;
-      padding: 4mm 0;
+      grid-template-columns: 58mm 1fr;
+      gap: 10mm;
+      padding: 6mm 0;
       border-bottom: 1px solid var(--sand-200);
       page-break-inside: avoid;
     }
@@ -270,51 +289,46 @@
       color: var(--earth-800);
       font-weight: 500;
       letter-spacing: 0.03em;
+      line-height: 1.5;
     }
-    .field-row .required {
-      display: inline-block;
-      font-size: 7pt;
-      background: var(--accent);
-      color: var(--sand-50);
-      padding: 1px 6px;
-      border-radius: 1px;
-      margin-left: 4px;
-      vertical-align: middle;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
+    .field-row .required,
     .field-row .optional {
       display: inline-block;
-      font-size: 7pt;
-      background: var(--sand-200);
-      color: var(--earth-700);
-      padding: 1px 6px;
+      font-size: 6.8pt;
+      padding: 1px 5px 1px 6px;
       border-radius: 1px;
       margin-left: 4px;
-      vertical-align: middle;
+      vertical-align: 2px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
+      line-height: 1.3;
+      white-space: nowrap;
     }
-    .field-row .desc { font-size: 10pt; }
+    .field-row .required { background: var(--accent); color: var(--sand-50); }
+    .field-row .optional { background: var(--sand-200); color: var(--earth-700); }
+    .field-row .desc { font-size: 10pt; line-height: 1.6; }
     .field-row .desc .example {
       display: block;
-      margin-top: 2mm;
+      margin-top: 3mm;
       font-family: var(--font-mono);
       font-size: 8.5pt;
       color: var(--earth-600);
       border-left: 2px solid var(--accent);
-      padding-left: 3mm;
+      padding-left: 4mm;
+      line-height: 1.55;
     }
 
     /* ---------- Callouts ---------- */
     .callout {
       border-left: 3px solid var(--accent);
       background: var(--sand-100);
-      padding: 5mm 7mm;
-      margin: 4mm 0 6mm;
+      padding: 6mm 8mm;
+      margin: 7mm 0 8mm;
       font-size: 10pt;
+      line-height: 1.6;
       page-break-inside: avoid;
     }
+    .callout > *:last-child { margin-bottom: 0; }
     .callout.warn {
       border-left-color: var(--danger);
       background: #fdf5f3;
@@ -327,16 +341,17 @@
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 1mm;
+      margin-bottom: 3mm;
+      font-weight: 500;
     }
     .callout.warn .label { color: var(--danger); }
 
     /* ---------- Screenshot placeholder ---------- */
     .screenshot {
-      margin: 5mm 0 6mm;
+      margin: 7mm 0 8mm;
       border: 1px dashed var(--sand-300);
       background: var(--sand-100);
-      padding: 15mm 10mm;
+      padding: 18mm 10mm;
       text-align: center;
       font-family: var(--font-mono);
       font-size: 8.5pt;
@@ -349,20 +364,35 @@
       color: var(--accent);
       font-weight: 500;
     }
+    .screenshot img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+      border: 1px solid var(--sand-300);
+    }
+    .screenshot:has(img) {
+      padding: 0;
+      border: none;
+      background: transparent;
+    }
+    .screenshot:has(img)::before { content: none; }
 
     /* ---------- Steps ---------- */
     ol.steps {
       counter-reset: step;
       list-style: none;
       padding: 0;
-      margin: 4mm 0 6mm;
+      margin: 6mm 0 8mm;
     }
     ol.steps > li {
       counter-increment: step;
-      padding: 0 0 4mm 12mm;
+      padding: 1mm 0 1mm 14mm;
       position: relative;
-      margin-bottom: 2mm;
+      margin-bottom: 5mm;
+      line-height: 1.55;
     }
+    ol.steps > li:last-child { margin-bottom: 0; }
     ol.steps > li::before {
       content: counter(step);
       position: absolute;
@@ -384,13 +414,14 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 4mm 0 6mm;
+      margin: 5mm 0 8mm;
       font-size: 10pt;
+      line-height: 1.55;
     }
     thead th {
       text-align: left;
       border-bottom: 2px solid var(--sand-300);
-      padding: 3mm 4mm;
+      padding: 4mm 5mm;
       font-family: var(--font-sans);
       font-weight: 600;
       font-size: 9pt;
@@ -399,10 +430,11 @@
       color: var(--earth-800);
     }
     tbody td {
-      padding: 3mm 4mm;
+      padding: 4mm 5mm;
       border-bottom: 1px solid var(--sand-200);
       vertical-align: top;
     }
+    tbody tr { page-break-inside: avoid; }
     tbody tr:nth-child(odd) td { background: var(--sand-100); }
 
     /* ---------- Footer line ---------- */
@@ -552,7 +584,7 @@
     <li>Click <strong>Sign in</strong>. You will be taken to the Dashboard.</li>
   </ol>
 
-  <div class="screenshot">The login screen (email + password + Sign in button)</div>
+  <div class="screenshot"><img src="screenshots/login.png" alt="The admin login screen" /></div>
 
   <h4>If you forget your password</h4>
   <p>There is no self-service "forgot password" link. Contact the developer (see Section 13) and ask for a password reset. The developer will set a new one and tell you what it is on a secure channel; change it on your side afterwards.</p>
@@ -582,7 +614,7 @@
     <li>Click <strong>Create post</strong>.</li>
   </ol>
 
-  <div class="screenshot">The New Post form filled in with example content</div>
+  <div class="screenshot"><img src="screenshots/news.png" alt="The New Post form filled in with example content" /></div>
 
   <h3>Fields on the News form</h3>
   <div class="field-table">
@@ -654,7 +686,7 @@
     <li>Click <strong>Create report</strong>.</li>
   </ol>
 
-  <div class="screenshot">The Report form with cover image and PDF attached</div>
+  <div class="screenshot"><img src="screenshots/report.png" alt="The Report form with cover image and PDF attached" /></div>
 
   <h3>Fields on the Report form</h3>
   <div class="field-table">
@@ -717,7 +749,7 @@
     <li>When finished, click <strong>Back to gallery</strong>.</li>
   </ol>
 
-  <div class="screenshot">The Gallery upload queue with photos ready to send</div>
+  <div class="screenshot"><img src="screenshots/gallery.png" alt="The Gallery upload queue with photos ready to send" /></div>
 
   <div class="callout">
     <span class="label">Tip</span>
@@ -1016,7 +1048,6 @@
   <div class="todos">
     <h3>TODOs for Tammy before sharing with OCC</h3>
     <ol>
-      <li><strong>Screenshot placeholders</strong> — six marked with "SCREENSHOT · " dashed boxes. Capture the real admin screens and embed them (or send to me and I'll swap them in).</li>
       <li><strong>Confirm delete UX</strong> — I described a browser-prompt confirmation. Verify this matches the actual admin behaviour; adjust Section 7's wording if different.</li>
       <li><strong>Gallery scope</strong> — I included Gallery. If OCC only wants News + Reports documented, remove Section 05 and references.</li>
       <li><strong>Draft / preview state</strong> — currently none; documented as "planned upgrade" in Section 7. Confirm this framing is OK or soften it.</li>
