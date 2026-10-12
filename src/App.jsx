@@ -13,6 +13,7 @@ import Gallery from './pages/Gallery.jsx'
 import FoundersStory from './pages/FoundersStory.jsx'
 import LaunchingSoon from './pages/LaunchingSoon.jsx'
 import NotFound from './pages/NotFound.jsx'
+import GiveawayModal from './components/shared/GiveawayModal.jsx'
 import { useLaunchState } from './lib/useLaunchState.js'
 
 // Lazy-load: public visitors never download the admin bundle.
@@ -70,6 +71,7 @@ function PublicApp() {
         </Routes>
       </main>
       <Footer />
+      <GiveawayModal />
     </div>
   )
 }
