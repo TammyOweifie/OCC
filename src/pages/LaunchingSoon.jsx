@@ -6,6 +6,7 @@
 import { Helmet } from 'react-helmet-async'
 import { diffToParts } from '../lib/launch.js'
 import { siteConfig, absoluteUrl } from '../lib/siteConfig.js'
+import GiveawayModal from '../components/shared/GiveawayModal.jsx'
 
 const socials = [
   {
@@ -138,6 +139,8 @@ function LaunchingSoon({ diffMs }) {
           </p>
         </main>
       </div>
+
+      <GiveawayModal />
     </>
   )
 }
