@@ -50,7 +50,12 @@ function PublicApp() {
   const { state, diffMs } = useLaunchState()
 
   if (state === 'countdown') {
-    return <LaunchingSoon diffMs={diffMs} />
+    return (
+      <>
+        <LaunchingSoon diffMs={diffMs} />
+        <GiveawayModal />
+      </>
+    )
   }
 
   return (
