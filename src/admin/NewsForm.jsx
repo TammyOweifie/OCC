@@ -11,6 +11,27 @@ function slugify(str) {
     .slice(0, 96)
 }
 
+// All OCC admins are in West Africa Time (UTC+1, no DST). The datetime
+// picker shows WAT regardless of the browser's own timezone — that way
+// an admin on the move still schedules against the audience's clock.
+const WAT_OFFSET = '+01:00'
+
+// Convert a WAT-local picker string ("2026-10-20T15:00") → UTC ISO string.
+function watInputToUtcIso(local) {
+  if (!local) return null
+  const iso = new Date(`${local}:00${WAT_OFFSET}`).toISOString()
+  return iso
+}
+
+// Convert a UTC ISO back → WAT-local picker string ("YYYY-MM-DDTHH:MM").
+function utcIsoToWatInput(iso) {
+  if (!iso) return ''
+  // Shift by +1h (WAT), then format YYYY-MM-DDTHH:MM.
+  const d = new Date(new Date(iso).getTime() + 60 * 60 * 1000)
+  const pad = n => String(n).padStart(2, '0')
+  return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())}T${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}`
+}
+
 const EMPTY = {
   title: '',
   slug: '',
@@ -21,6 +42,16 @@ const EMPTY = {
   existingThumbnailUrl: '', // current asset URL (if editing)
   existingThumbnailAssetId: '', // asset _id, so PATCH can keep it if untouched
   alt: '',
+  visibility: 'draft',      // 'draft' | 'publishNow' | 'schedule'
+  scheduledAt: '',          // WAT picker value; only used when visibility === 'schedule'
+  originalPublishedAt: null, // the UTC ISO as loaded (for edit mode)
+}
+
+function deriveVisibility(publishedAt) {
+  if (!publishedAt) return 'draft'
+  const t = new Date(publishedAt).getTime()
+  if (t > Date.now()) return 'schedule'
+  return 'publishNow'
 }
 
 export default function NewsForm() {
@@ -40,6 +71,7 @@ export default function NewsForm() {
     adminApi.getNewsPost(id)
       .then(({ post }) => {
         if (!alive) return
+        const visibility = deriveVisibility(post.publishedAt)
         setForm({
           title: post.title || '',
           slug: post.slug || '',
@@ -50,6 +82,9 @@ export default function NewsForm() {
           existingThumbnailUrl: post.thumbnailUrl || '',
           existingThumbnailAssetId: post.thumbnailAssetId || '',
           alt: post.thumbnailAlt || '',
+          visibility,
+          scheduledAt: visibility === 'schedule' ? utcIsoToWatInput(post.publishedAt) : '',
+          originalPublishedAt: post.publishedAt || null,
         })
         setSlugTouched(true)
       })
@@ -81,15 +116,49 @@ export default function NewsForm() {
     setForm(f => ({ ...f, thumbnail: { file: resized, dataUrl } }))
   }
 
+  function resolvePublishedAt() {
+    if (form.visibility === 'draft') return null
+    if (form.visibility === 'publishNow') {
+      // In edit mode, if the post was already published in the past,
+      // preserve the original timestamp so the publish-date history is
+      // stable. For a new post or a draft/scheduled→publish-now switch,
+      // use now.
+      if (
+        isEdit &&
+        form.originalPublishedAt &&
+        new Date(form.originalPublishedAt).getTime() <= Date.now()
+      ) {
+        return form.originalPublishedAt
+      }
+      return new Date().toISOString()
+    }
+    // 'schedule'
+    return watInputToUtcIso(form.scheduledAt)
+  }
+
   async function handleSubmit(e) {
     e.preventDefault()
     setError('')
+
+    if (form.visibility === 'schedule') {
+      if (!form.scheduledAt) {
+        setError('Pick a date and time to schedule this post.')
+        return
+      }
+      const scheduledUtc = watInputToUtcIso(form.scheduledAt)
+      if (new Date(scheduledUtc).getTime() <= Date.now()) {
+        setError('Scheduled time must be in the future. Pick a later time, or choose Publish now.')
+        return
+      }
+    }
+
     setSaving(true)
     try {
       const payload = {
         title: form.title,
         slug: form.slug || slugify(form.title),
         date: form.date ? new Date(form.date).toISOString() : null,
+        publishedAt: resolvePublishedAt(),
         excerpt: form.excerpt,
         body: form.body,
       }
@@ -130,6 +199,13 @@ export default function NewsForm() {
   }
 
   const previewUrl = form.thumbnail?.dataUrl || form.existingThumbnailUrl
+  const submitLabel = isEdit
+    ? 'Save changes'
+    : form.visibility === 'draft'
+      ? 'Save draft'
+      : form.visibility === 'schedule'
+        ? 'Schedule post'
+        : 'Publish post'
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-16">
@@ -169,13 +245,58 @@ export default function NewsForm() {
           />
         </Field>
 
-        <Field label="Date published">
+        <Field label="Date (shown on card)" help="The date displayed on the news card. Doesn't affect publishing.">
           <input
             type="date"
             value={form.date}
             onChange={e => updateField('date', e.target.value)}
             className="input"
           />
+        </Field>
+
+        <Field label="Visibility" help="Drafts and scheduled posts are hidden from the public site. Admins can proof them via Preview.">
+          <div className="space-y-2">
+            <VisibilityOption
+              name="visibility"
+              value="draft"
+              current={form.visibility}
+              onChange={v => updateField('visibility', v)}
+              label="Save as draft"
+              hint="Hidden from the public site. Visible to admins only."
+            />
+            <VisibilityOption
+              name="visibility"
+              value="publishNow"
+              current={form.visibility}
+              onChange={v => updateField('visibility', v)}
+              label="Publish now"
+              hint="Goes live immediately when you save."
+            />
+            <VisibilityOption
+              name="visibility"
+              value="schedule"
+              current={form.visibility}
+              onChange={v => updateField('visibility', v)}
+              label="Schedule for later"
+              hint="Goes live automatically at the chosen date and time."
+            />
+            {form.visibility === 'schedule' && (
+              <div className="pl-7 pt-3 border-l-2 border-sand-200 ml-1.5 space-y-1.5">
+                <label className="block">
+                  <span className="block font-mono text-[11px] uppercase tracking-wider text-earth-600 mb-1.5">
+                    Publish at <span className="normal-case tracking-normal text-earth-600">(West Africa Time, UTC+1)</span>
+                  </span>
+                  <input
+                    type="datetime-local"
+                    value={form.scheduledAt}
+                    onChange={e => updateField('scheduledAt', e.target.value)}
+                    className="input max-w-xs"
+                    required
+                  />
+                </label>
+              </div>
+            )}
+          </div>
         </Field>
 
         <Field label="Thumbnail" help="Upload a cover image. Existing image is kept if you don't pick a new one.">
@@ -231,7 +352,7 @@ export default function NewsForm() {
             disabled={saving}
             className="px-8 py-3 bg-forest-800 text-sand-50 text-xs uppercase tracking-eyebrow font-medium hover:bg-accent transition-colors disabled:opacity-60"
           >
-            {saving ? 'Saving…' : isEdit ? 'Save changes' : 'Create post'}
+            {saving ? 'Saving…' : submitLabel}
           </button>
         </div>
       </form>
@@ -250,6 +371,28 @@ function Field({ label, help, required, children }) {
       </span>
       {children}
       {help && <span className="block mt-1.5 text-xs text-earth-600 font-light">{help}</span>}
+    </label>
+  )
+}
+
+function VisibilityOption({ name, value, current, onChange, label, hint }) {
+  const checked = current === value
+  return (
+    <label className="flex items-start gap-3 cursor-pointer group">
+      <input
+        type="radio"
+        name={name}
+        value={value}
+        checked={checked}
+        onChange={() => onChange(value)}
+        className="mt-1 accent-forest-800"
+      />
+      <span className="block">
+        <span className={`block text-sm ${checked ? 'text-sand-900 font-medium' : 'text-earth-700'}`}>
+          {label}
+        </span>
+        <span className="block text-xs text-earth-600 font-light mt-0.5">{hint}</span>
+      </span>
     </label>
   )
 }

@@ -4,12 +4,13 @@
 //   { id, title, date, excerpt, body, coverImage, coverAlt }
 //
 // Field-to-current-data mapping:
-//   title      → title
-//   slug       → id (via slug.current)
-//   date       → date
-//   thumbnail  → coverImage (via .asset->url) + coverAlt (via .alt)
-//   excerpt    → excerpt
-//   body       → body (portable text; flattened to string[] in the fetch fn)
+//   title       → title
+//   slug        → id (via slug.current)
+//   date        → date (display date shown on the card)
+//   publishedAt → gates public visibility; null = draft, future = scheduled
+//   thumbnail   → coverImage (via .asset->url) + coverAlt (via .alt)
+//   excerpt     → excerpt
+//   body        → body (portable text; flattened to string[] in the fetch fn)
 
 export default {
   name: 'newsPost',
@@ -33,7 +34,14 @@ export default {
     },
     {
       name: 'date',
-      title: 'Date published',
+      title: 'Date (shown on card)',
+      description: 'The date displayed on the news card. Separate from the publish gate below.',
+      type: 'datetime',
+    },
+    {
+      name: 'publishedAt',
+      title: 'Publish at',
+      description: 'When this post goes live to the public. Leave empty to save as a draft. Set to a future date/time to schedule.',
       type: 'datetime',
     },
     {
@@ -68,14 +76,15 @@ export default {
     select: {
       title: 'title',
       date: 'date',
+      publishedAt: 'publishedAt',
       media: 'thumbnail',
     },
-    prepare({ title, date, media }) {
-      return {
-        title,
-        subtitle: date ? new Date(date).toLocaleDateString() : 'No date',
-        media,
-      }
+    prepare({ title, date, publishedAt, media }) {
+      let status
+      if (!publishedAt) status = 'DRAFT'
+      else if (new Date(publishedAt) > new Date()) status = `SCHEDULED • ${new Date(publishedAt).toLocaleString()}`
+      else status = date ? new Date(date).toLocaleDateString() : 'Published'
+      return { title, subtitle: status, media }
     },
   },
 }

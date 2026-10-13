@@ -45,6 +45,7 @@ async function handler(req, res) {
         title,
         "slug": slug.current,
         date,
+        publishedAt,
         excerpt,
         body,
         "thumbnailUrl": thumbnail.asset->url,
@@ -67,13 +68,20 @@ async function handler(req, res) {
   }
 
   if (req.method === 'PATCH') {
-    const { title, slug, date, excerpt, body, thumbnail } = req.body || {}
+    const { title, slug, date, publishedAt, excerpt, body, thumbnail } = req.body || {}
     const patch = sanityWriteClient.patch(id)
     const set = {}
+    const unset = []
 
     if (title !== undefined) set.title = title
     if (slug !== undefined) set.slug = { _type: 'slug', current: slug }
     if (date !== undefined) set.date = date || null
+    // publishedAt: explicit null means "save as draft", so unset the field.
+    // Omitted means "leave visibility unchanged".
+    if (publishedAt !== undefined) {
+      if (publishedAt === null) unset.push('publishedAt')
+      else set.publishedAt = publishedAt
+    }
     if (excerpt !== undefined) set.excerpt = excerpt
     if (body !== undefined) set.body = textToPortableText(body)
 
@@ -86,7 +94,9 @@ async function handler(req, res) {
       }
     }
 
-    const result = await patch.set(set).commit()
+    let committed = patch.set(set)
+    if (unset.length > 0) committed = committed.unset(unset)
+    const result = await committed.commit()
     res.status(200).json({ _id: result._id })
     return
   }

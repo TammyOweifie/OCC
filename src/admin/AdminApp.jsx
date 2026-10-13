@@ -6,6 +6,7 @@ import Login from './Login.jsx'
 import Dashboard from './Dashboard.jsx'
 import NewsList from './NewsList.jsx'
 import NewsForm from './NewsForm.jsx'
+import NewsPreview from './NewsPreview.jsx'
 import ReportsList from './ReportsList.jsx'
 import ReportForm from './ReportForm.jsx'
 import GalleryList from './GalleryList.jsx'
@@ -35,6 +36,10 @@ export default function AdminApp() {
         <Route
           path="/admin/news"
           element={<ProtectedShell><NewsList /></ProtectedShell>}
+        />
+        <Route
+          path="/admin/news/preview"
+          element={<ProtectedShell><NewsPreview /></ProtectedShell>}
         />
         <Route
           path="/admin/news/new"

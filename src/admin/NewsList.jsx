@@ -10,6 +10,45 @@ function formatDate(iso) {
   })
 }
 
+// Format a UTC ISO as West Africa Time (UTC+1) — matches the picker in
+// NewsForm so admins see times in the same frame they entered.
+function formatWat(iso) {
+  if (!iso) return ''
+  const d = new Date(new Date(iso).getTime() + 60 * 60 * 1000)
+  const pad = n => String(n).padStart(2, '0')
+  return `${pad(d.getUTCDate())} ${d.toLocaleString('en-US', { month: 'short', timeZone: 'UTC' })} ${d.getUTCFullYear()}, ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())} WAT`
+}
+
+function statusOf(post) {
+  if (!post.publishedAt) return 'draft'
+  return new Date(post.publishedAt).getTime() > Date.now() ? 'scheduled' : 'published'
+}
+
+function StatusBadge({ post }) {
+  const s = statusOf(post)
+  if (s === 'draft') {
+    return (
+      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-sand-200 text-earth-700 font-mono text-[10px] uppercase tracking-wider">
+        Draft
+      </span>
+    )
+  }
+  if (s === 'scheduled') {
+    return (
+      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-amber-100 text-amber-900 font-mono text-[10px] uppercase tracking-wider">
+        <span className="w-1.5 h-1.5 bg-amber-700 rounded-full" />
+        Scheduled
+      </span>
+    )
+  }
+  return (
+    <span className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-forest-700/10 text-forest-800 font-mono text-[10px] uppercase tracking-wider">
+      <span className="w-1.5 h-1.5 bg-forest-700 rounded-full" />
+      Published
+    </span>
+  )
+}
+
 export default function NewsList() {
   const navigate = useNavigate()
   const [posts, setPosts] = useState(null)
@@ -56,13 +95,21 @@ export default function NewsList() {
             News
           </h1>
         </div>
-        <button
-          type="button"
-          onClick={() => navigate('/admin/news/new')}
-          className="px-6 py-3 bg-forest-800 text-sand-50 text-xs uppercase tracking-eyebrow font-medium hover:bg-accent transition-colors"
-        >
-          + New post
-        </button>
+        <div className="flex items-center gap-3">
+          <Link
+            to="/admin/news/preview"
+            className="px-5 py-3 border border-sand-300 text-earth-700 text-xs uppercase tracking-eyebrow font-medium hover:bg-sand-100 transition-colors"
+          >
+            Preview
+          </Link>
+          <button
+            type="button"
+            onClick={() => navigate('/admin/news/new')}
+            className="px-6 py-3 bg-forest-800 text-sand-50 text-xs uppercase tracking-eyebrow font-medium hover:bg-accent transition-colors"
+          >
+            + New post
+          </button>
+        </div>
       </div>
 
       {error && (
@@ -97,7 +144,7 @@ export default function NewsList() {
               <tr className="border-b border-sand-200 text-left">
                 <th className="w-24 py-3 px-4 font-mono text-xs uppercase tracking-wider text-earth-600 font-medium"></th>
                 <th className="py-3 px-4 font-mono text-xs uppercase tracking-wider text-earth-600 font-medium">Title</th>
-                <th className="py-3 px-4 font-mono text-xs uppercase tracking-wider text-earth-600 font-medium hidden md:table-cell">Date</th>
+                <th className="py-3 px-4 font-mono text-xs uppercase tracking-wider text-earth-600 font-medium hidden md:table-cell">Status</th>
                 <th className="w-40 py-3 px-4"></th>
               </tr>
             </thead>
@@ -125,8 +172,17 @@ export default function NewsList() {
                       </div>
                     )}
                   </td>
-                  <td className="py-3 px-4 font-mono text-xs text-earth-600 hidden md:table-cell">
-                    {formatDate(post.date)}
+                  <td className="py-3 px-4 hidden md:table-cell">
+                    <StatusBadge post={post} />
+                    <div className="font-mono text-[11px] text-earth-600 mt-1.5">
+                      {statusOf(post) === 'scheduled'
+                        ? formatWat(post.publishedAt)
+                        : statusOf(post) === 'published'
+                          ? formatDate(post.publishedAt)
+                          : post.date
+                            ? `Card date: ${formatDate(post.date)}`
+                            : ''}
+                    </div>
                   </td>
                   <td className="py-3 px-4 text-right">
                     <Link

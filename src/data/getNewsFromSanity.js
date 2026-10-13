@@ -19,10 +19,15 @@
 
 import { sanityClient } from '../lib/sanityClient.js'
 
-const QUERY = /* groq */ `*[_type == "newsPost"] | order(date desc) {
+// Public query: only posts whose publishedAt is set and in the past.
+// Drafts (no publishedAt) and future-scheduled posts are filtered out.
+// Order by publishedAt so a freshly-published scheduled post lands at
+// the top, not where its display `date` would place it.
+const QUERY = /* groq */ `*[_type == "newsPost" && defined(publishedAt) && publishedAt <= now()] | order(publishedAt desc) {
   "id": slug.current,
   title,
   date,
+  publishedAt,
   excerpt,
   "body": body[]{ children[]{ text } },
   "coverImage": thumbnail.asset->url,

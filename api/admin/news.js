@@ -32,11 +32,15 @@ async function uploadImageIfNew(thumbnail) {
 
 async function handler(req, res) {
   if (req.method === 'GET') {
+    // Admin surface: show every post regardless of publish state so staff
+    // can edit drafts and scheduled posts. Ordered by publishedAt (nulls
+    // last) so unpublished work surfaces at the top of the list.
     const posts = await sanityWriteClient.fetch(
-      `*[_type == "newsPost"] | order(date desc) {
+      `*[_type == "newsPost"] | order(coalesce(publishedAt, "9999") desc, date desc) {
         _id,
         title,
         date,
+        publishedAt,
         excerpt,
         "slug": slug.current,
         "thumbnailUrl": thumbnail.asset->url,
@@ -48,7 +52,7 @@ async function handler(req, res) {
   }
 
   if (req.method === 'POST') {
-    const { title, slug, date, excerpt, body, thumbnail } = req.body || {}
+    const { title, slug, date, publishedAt, excerpt, body, thumbnail } = req.body || {}
 
     if (!title) {
       res.status(400).json({ error: 'Title is required' })
@@ -77,6 +81,7 @@ async function handler(req, res) {
             .slice(0, 96),
       },
       date: date || null,
+      publishedAt: publishedAt || null,
       excerpt: excerpt || '',
       body: textToPortableText(body || ''),
       ...(thumbnailField && { thumbnail: thumbnailField }),
