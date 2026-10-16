@@ -7,6 +7,8 @@ import ScrollReveal from '../components/shared/ScrollReveal.jsx'
 import VideoEmbed from '../components/shared/VideoEmbed.jsx'
 import Seo from '../components/shared/Seo.jsx'
 import { partners } from '../data/partners.js'
+import GiveawayModal from '../components/shared/GiveawayModal.jsx'
+
 
 const heroSlides = [
   { src: '/assets/images/home/bg-hero.jpg', alt: 'The Grotto, Obudu Plateau' },
@@ -198,6 +200,8 @@ function Home() {
           </ScrollReveal>
         </div>
       </section>
+
+      <GiveawayModal />
     </>
   )
 }
