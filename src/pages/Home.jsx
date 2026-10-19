@@ -7,7 +7,6 @@ import ScrollReveal from '../components/shared/ScrollReveal.jsx'
 import VideoEmbed from '../components/shared/VideoEmbed.jsx'
 import Seo from '../components/shared/Seo.jsx'
 import { partners } from '../data/partners.js'
-import GiveawayModal from '../components/shared/GiveawayModal.jsx'
 
 
 const heroSlides = [
@@ -200,8 +199,6 @@ function Home() {
           </ScrollReveal>
         </div>
       </section>
-
-      <GiveawayModal />
     </>
   )
 }
