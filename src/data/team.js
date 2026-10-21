@@ -13,7 +13,7 @@ export const coreTeam = [
     bio: 'Eyituoyo Ofuya is a Research Associate/Ecologist with the Obudu Conservation Centre. He holds a PhD degree in Biodiversity Management from The Federal University Technology Akure. He is a nature enthusiast with special interest in primate conservation. At OCC he is responsible for designing and implementing field surveys, training field assistants, liaising with local stakeholders and presenting research output. He is a member of the Global Environments Network (GEN), Nigerian Primatological Society (NiPS), African Primatological Society (APS),and American Society of Primatologists (ASP).',
   },
   {
-    name: 'Dr. Kevin Eyos Acha',
+    name: 'Kevin Eyos Acha',
     role: 'Chief Programme Manager',
     photo: '/assets/images/team/kevin.png',
     bio: 'Dr. Kevin Eyos is the chief programme manager at Obudu Conservation Centre. He holds a PhD degree in Forest and Wildlife Management Education at the University of Calabar, Nigeria. Kevin is a passionate and dedicated early career field conservationist, ornithologist, wildlife photographer and citizen scientist with keen interest in documenting and conserving the biodiversity of Obudu Plateau surrounding landscape through indigenous people participation in citizen science and biodiversity monitoring.',
